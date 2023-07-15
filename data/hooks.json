@@ -1,0 +1,14 @@
+{
+    "member": {
+        "type": "C",
+        "class": "\\IPS\\Member"
+    },
+    "usermenu": {
+        "type": "S",
+        "class": "\\IPS\\Theme\\class_core_front_global"
+    },
+    "steamlogin": {
+        "type": "C",
+        "class": "\\IPS\\steamlogin\\sources\\Login\\Steam"
+    }
+}

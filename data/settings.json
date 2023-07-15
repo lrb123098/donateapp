@@ -1,0 +1,94 @@
+[
+    {
+        "key": "donate_csgostore_db_database",
+        "default": ""
+    },
+    {
+        "key": "donate_csgostore_db_host",
+        "default": ""
+    },
+    {
+        "key": "donate_csgostore_db_pass",
+        "default": ""
+    },
+    {
+        "key": "donate_csgostore_db_port",
+        "default": ""
+    },
+    {
+        "key": "donate_csgostore_db_user",
+        "default": ""
+    },
+    {
+        "key": "donate_donation_goal",
+        "default": ""
+    },
+    {
+        "key": "donate_log_enabled",
+        "default": "1"
+    },
+    {
+        "key": "donate_paypal_api_live_clientid",
+        "default": ""
+    },
+    {
+        "key": "donate_paypal_api_live_secret",
+        "default": ""
+    },
+    {
+        "key": "donate_paypal_api_sandbox_clientid",
+        "default": ""
+    },
+    {
+        "key": "donate_paypal_api_sandbox_enabled",
+        "default": "0"
+    },
+    {
+        "key": "donate_paypal_api_sandbox_secret",
+        "default": ""
+    },
+    {
+        "key": "donate_paypal_email",
+        "default": ""
+    },
+    {
+        "key": "donate_paypal_ipn_enabled",
+        "default": "1"
+    },
+    {
+        "key": "donate_paypal_webhook_enabled",
+        "default": "0"
+    },
+    {
+        "key": "donate_paypal_webhook_id",
+        "default": ""
+    },
+    {
+        "key": "donate_provider_smallprint",
+        "default": ""
+    },
+    {
+        "key": "donate_sourcebans_db_database",
+        "default": ""
+    },
+    {
+        "key": "donate_sourcebans_db_host",
+        "default": ""
+    },
+    {
+        "key": "donate_sourcebans_db_pass",
+        "default": ""
+    },
+    {
+        "key": "donate_sourcebans_db_port",
+        "default": ""
+    },
+    {
+        "key": "donate_sourcebans_db_user",
+        "default": ""
+    },
+    {
+        "key": "donate_sourcebans_groups",
+        "default": ""
+    }
+]

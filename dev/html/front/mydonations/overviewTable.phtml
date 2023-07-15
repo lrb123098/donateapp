@@ -1,0 +1,7 @@
+<ips:template parameters="$title, $langPrefix, $rows, $headers=array( 'item' => 1, 'type' => 1, 'cost' => 1, 'order' => 1, 'expires' => 1, 'giftee' => 1 )" />
+<div>
+	<h2 class="ipsType_sectionTitle ipsType_reset ipsClear">{lang="$title"}</h2>
+	<ol class="ipsDataList ipsClear">
+		{template="overviewRows" group="mydonations" app="donate" params="$langPrefix, $rows, $headers"}
+	</ol>
+</div>

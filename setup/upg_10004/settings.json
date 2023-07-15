@@ -1,0 +1,29 @@
+{
+    "added": [
+        "donate_csgostore_db_database",
+        "donate_csgostore_db_host",
+        "donate_csgostore_db_pass",
+        "donate_csgostore_db_port",
+        "donate_csgostore_db_user",
+        "donate_donation_goal",
+        "donate_log_enabled",
+        "donate_paypal_api_live_clientid",
+        "donate_paypal_api_live_secret",
+        "donate_paypal_api_sandbox_clientid",
+        "donate_paypal_api_sandbox_enabled",
+        "donate_paypal_api_sandbox_secret",
+        "donate_paypal_email",
+        "donate_paypal_ipn_enabled",
+        "donate_paypal_webhook_enabled",
+        "donate_paypal_webhook_id",
+        "donate_provider_smallprint",
+        "donate_sourcebans_db_database",
+        "donate_sourcebans_db_host",
+        "donate_sourcebans_db_pass",
+        "donate_sourcebans_db_port",
+        "donate_sourcebans_db_user",
+        "donate_sourcebans_groups"
+    ],
+    "edited": [],
+    "removed": []
+}

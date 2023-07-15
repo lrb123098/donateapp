@@ -1,0 +1,151 @@
+
+/* BOTH */
+@media screen and (max-width: 979px) {
+	.ipsStep:not(.ipsStep_active) {
+		display: none;
+	}
+	
+	.cCheckout_columns {
+		display: flex !important;
+    flex-wrap: wrap;
+	}
+	
+	.cCheckout_contentColumn {
+		order: 2;
+	}
+	
+	.cCheckout_sidebarColumn {
+		order: 1;
+	}
+	
+	.cCheckout_sidebarColumn .cItemCard_perks {
+		display: none;
+	}
+	
+	.cCheckout_buttons {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+	
+	.cCheckout_buttons .ipsButton {
+		margin-bottom: 15px;
+	}
+	
+	.cItemCard {
+		height: inherit;
+		margin: 0;
+	}
+	
+	.cItemCards .cItemCard_vertical {
+		width: 100%;
+		margin-bottom: 15px;
+		margin-right: 0;
+	}
+	
+	.cItemCards .cItemCard_vertical:last-of-type {
+		margin-bottom: 0;
+		margin-right: 0;
+	}
+	
+	.cItemCard_info {
+		padding: 14px;
+	}
+	
+	.cItemCards .cItemCard_vertical .cItemCard_info {
+		height: unset;
+	}
+	
+	.cItemCard_name {
+		text-align: center;
+	}
+	
+	.cItemCard_desc {
+		font-size: 16px;
+	}
+	
+	.cItemCard_perks {
+		text-align: center;
+		padding: 0 14px 0 14px;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perks {
+		display: block;
+	}
+	
+	.cItemCard_perkGroup:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perkGroup:first-of-type {
+		padding-left: 0;
+	}
+	
+	.cItemCard_perkGroup {
+		margin-bottom: 15px;
+		height: inherit;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perkGroup {
+		border-left: none;
+		padding-left: 0;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perkGroup:not(:first-child) {
+		border-top: 2px solid rgba(0, 0, 0, 0.05);
+		margin-top: 10px;
+		padding-top: 10px;
+	}
+	
+	.cItemCard_perkTitle {
+		font-size: 18px;
+		margin: 0;
+	}
+	
+	.cItemCard_perkCol > li {
+		min-height: auto;
+		font-size: 14px;
+		margin: 5px 15px 0 15px;
+	}
+	
+	.cItemCards .cItemCard_vertical .cItemCard_input {
+		position: relative;
+		left: unset;
+		bottom: unset;
+	}
+	
+	.cPaymentOption {
+		display: block !important;
+		position: relative;
+	}
+	
+	.cPaymentOption:first-of-type {
+		margin-right: unset;
+		margin-left: unset;
+		margin-bottom: 15px;
+	}
+	
+	.cPaymentOption .ipsCustomInput {
+		position: absolute;
+		top: 15px;
+		left: 22px;
+	}
+	
+	.cCheckout_complete i.fa {
+		display: block;
+	}
+	
+	.cCheckout_completeOrder, .cCheckout_completeMessageDesc {
+		width: 80%;
+	}
+	
+	.cCheckout_completeOrder .ipsColumn:first-child {
+		border-right: none;
+	}
+	
+	.cCheckout_completeMessageDescDetail {
+		text-align: unset;
+	}
+}

@@ -1,0 +1,79 @@
+<ips:template parameters="$item, $class='horizontal', $isInput=FALSE, $showPrice=TRUE, $showPerks=TRUE" />
+<div class="cItemCard cItemCard_{$class} ipsBox ipsAreaBackground_reset ipsSpacer_bottom" {{if $showPerks && $item->perks_desc}}data-itemCard-hasPerks{{endif}}>
+	{{if $isInput}}
+		<label for="elItem{$item->id}" class="ipsCursor_pointer">
+	{{endif}}
+	{{if $class === 'horizontal'}}
+		<div class="ipsColumns ipsColumns_collapseTablet ipsColumns_collapsePhone">
+			<div class="ipsColumn ipsColumn_veryWide ipsType_center ipsAreaBackground_light ipsPad ipsPad_double">
+	{{endif}}
+		<div class="cItemCard_info {{if $class === 'vertical'}}ipsType_center ipsAreaBackground_light ipsPad ipsPad_double{{endif}}">
+			<h2 class="cItemCard_name ipsType_reset" {{if $item->color}}style="color:{$item->color};"{{endif}}>
+				{$item->name}
+			</h2>
+			{{$canDisplayPrice = !empty( $item->price_detail ) || $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION ) || $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_ONETIME, \IPS\donate\Order::PRICE_TYPE_FIXED );}}
+			{{if $showPrice && $canDisplayPrice}}
+			<div class="cItemCard_price ipsSpacer_top">
+				<h2 class="cItemCard_price ipsType_reset">
+					{$item->price->currencySymbol}{$item->price->format}
+				</h2>
+				{{if $item->price_detail || $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION )}}
+					<h3 class="cItemCard_priceDetail ipsType_reset">
+						/
+						{{if $item->price_detail}}
+							{$item->price_detail}
+						{{elseif $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION )}}
+							{expression="\IPS\donate\Application::secondsFormat( $item->active_length, TRUE )['word']" raw="true"}
+						{{endif}}
+					</h3>
+				{{endif}}
+			</div>
+			{{endif}}
+			<div class="cItemCard_desc ipsPos_center ipsType_break ipsType_contained">
+				{$item->desc|raw}
+			</div>
+			{{if $isInput}}
+				<div class="cItemCard_input ipsSpacer_top ipsType_center">
+						<span class='ipsCustomInput'>
+							<input type='radio' id='elItem{$item->id}' name="donate_checkout_items" value="{$item->id}">
+							<span></span>
+						</span>
+				</div>
+			{{endif}}
+		</div>
+	{{if $class === 'horizontal'}}
+		</div>
+		<div class="ipsColumn ipsColumn_fluid ipsPad ipsPad_double">
+	{{endif}}
+	{{if $showPerks && $item->perks_desc}}
+	<div class="cItemCard_perks {{if $class === 'vertical'}}ipsPad ipsPad_double ipsPos_center{{endif}}">
+		{{if \is_array( $item->perks_desc )}}
+			{{foreach $item->perks_desc as $group}}
+				<div class="cItemCard_perkGroup">
+					<div class="cItemCard_perkTitle">
+						{$group['title']}
+					</div>
+					<ul class="cItemCard_perkCol">
+						{{foreach $group['perks'] as $desc}}
+							<li>
+								{$desc}
+							</li>
+						{{endforeach}}
+					</ul>
+				</div>
+			{{endforeach}}
+		{{else}}
+			{$item->perks_desc}
+		{{endif}}
+	</div>
+	{{endif}}
+	{{if $class === 'horizontal'}}
+		</div>
+	{{endif}}
+	{{if $class === 'horizontal'}}
+		</div>
+	{{endif}}
+	{{if $isInput}}
+		</label>
+	{{endif}}
+</div>

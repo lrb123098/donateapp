@@ -1,0 +1,30 @@
+{
+    "settings": {
+        "settings": {
+            "tab": "donate",
+            "controller": "settings",
+            "do": "",
+            "restriction": "donate_settings_manage"
+        }
+    },
+    "donations": {
+        "items": {
+            "tab": "donate",
+            "controller": "items",
+            "do": "",
+            "restriction": "donate_donations_items_manage"
+        },
+        "transactions": {
+            "tab": "donate",
+            "controller": "transactions",
+            "do": "",
+            "restriction": "donate_donations_transactions_manage"
+        },
+        "subscriptions": {
+            "tab": "donate",
+            "controller": "subscriptions",
+            "do": "",
+            "restriction": "donate_donations_subscriptions_manage"
+        }
+    }
+}

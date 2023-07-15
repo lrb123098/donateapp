@@ -1,0 +1,8 @@
+<ips:template parameters="$active" />
+<span style="width: 70px;" class="ipsType_center ipsBadge {{if $active}}ipsBadge_positive{{else}}ipsBadge_intermediary{{endif}}">
+	{{if $active}}
+		{lang="donate_subscriptions_active"}
+	{{else}}
+		{lang="donate_subscriptions_inactive"}
+	{{endif}}
+</span>

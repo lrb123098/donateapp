@@ -1,0 +1,6 @@
+<ips:template parameters="$items" />
+<div class="cItemCards ipsPad">
+	{{foreach $items as $item}}
+		{template="itemCard" group="checkout" app="donate" params="$item, 'vertical', TRUE"}
+	{{endforeach}}
+</div>

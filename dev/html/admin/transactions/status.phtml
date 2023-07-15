@@ -1,0 +1,4 @@
+<ips:template parameters="$status" />
+<span style="width: 70px;" class="ipsType_center ipsBadge {{if $status === 'paid'}}ipsBadge_positive{{elseif $status === 'refunded'}}ipsBadge_intermediary{{else}}ipsBadge_negative{{endif}}">
+	{lang="donate_transactions_status_$status"}
+</span>

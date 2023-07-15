@@ -1,0 +1,28 @@
+<ips:template parameters="$donations, $orientation='vertical'" />
+<h3 class='ipsType_reset ipsWidget_title'>{lang="block_donationGoal"}</h3>
+{{if $donations && \count( $donations )}}
+	<div class='ipsWidget_inner ipsPad ipsType_center'>
+		<div class="ipsType_normal ipsType_light ipsType_uppercase ipsSpacer_bottom ipsSpacer_half">
+			{lang="block_donationGoal_month" sprintf="date('F')"}
+		</div>
+		<div class="ipsType_sectionHead ipsSpacer_bottom ipsSpacer_half">
+			<strong class="{{if $donations['total']->isGreaterThanOrEqualTo( $donations['goal'] )}}ipsType_success{{endif}}">
+				{$donations['total']->currencySymbol}{number="$donations['total']->rawFormat"}
+			</strong>
+			/
+			<span class="ipsType_normal ipsType_light">
+				{$donations['goal']->currencySymbol}{number="$donations['goal']->rawFormat"}
+			</span>
+		</div>
+		<div class="ipsProgressBar ipsProgressBar_fullWidth ipsClear">
+			<div class="ipsProgressBar_progress" style="width: {$donations['percentage']}%; max-width: 100%;">
+				<span data-role="percentage">{number="$donations['percentage']"}</span>%
+			</div>
+		</div>
+		<div class="ipsSpacer_top">
+			<a class="ipsButton ipsButton_medium ipsButton_fullWidth ipsButton_important" href="{url='app=donate&module=donate&controller=checkout' seoTemplate='donate_checkout'}">
+				{lang="block_donationGoal_donate"}
+			</a>
+		</div>
+	</div>
+{{endif}}

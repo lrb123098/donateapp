@@ -1,0 +1,1300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme name="Default" author_name="Invision Power Services, Inc" author_url="https://www.invisioncommunity.com">
+ <template template_group="checkout" template_name="complete" template_data="$order, $detail=NULL" template_location="front" template_app="donate"><![CDATA[<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="donate_checkout"}</h1>
+</div>
+
+
+<div class="cCheckout_complete">
+	<div class="ipsBox ipsBox_transparent ipsAreaBackground_light">
+		<div class="ipsAreaBackground_light ipsPad">
+			<div class="ipsAreaBackground_reset ipsPad ipsType_center">
+				<h1 class="cCheckout_completeMessage ipsType_veryLarge">
+					{{if $order->status === \IPS\donate\Order::STATUS_COMPLETED}}
+						<i class="fa fa-check"></i> {lang="donate_checkout_complete_success"}
+					{{elseif $order->status === \IPS\donate\Order::STATUS_PENDING}}
+						<i class="fa fa-credit-card"></i> {lang="donate_checkout_complete_pending"}
+					{{endif}}
+				</h1>
+				<div class="cCheckout_completeOrder ipsType_center ipsPos_center ipsAreaBackground ipsPad ipsSpacer_bottom">
+					<div class="ipsAreaBackground_light ipsBox ipsBox_transparent ipsPad ipsPad_double">
+						<div class="ipsColumns ipsColumns_collapseTablet ipsColumns_collapsePhone">
+							<div class="ipsColumn ipsColumn_fluid">
+								<h2 class="ipsType_reset">
+									{lang="donate_checkout_complete_order_number"}
+								</h2>
+								<div class="ipsType_normal ipsSpacer_top ipsSpacer_half">
+									{$order->token}
+								</div>
+								{{if $detail}}
+									<div class="ipsSpacer_top ipsSpacer_half">
+										{{if isset( $detail['icon'] )}}
+											<i class="fa fa-{$detail['icon']} fa-lg"></i>
+										{{endif}}
+										{{if isset( $detail['title'] )}}
+											<h4 class="ipsType_reset">
+												{lang="$detail['title']"}
+											</h4>
+										{{elseif isset( $detail['titleHtml'] )}}
+											<div>
+												{$detail['titleHtml']|raw}
+											</div>
+										{{endif}}
+										{{if isset( $detail['content'] )}}
+											<span>{$detail['content']|raw}</span>
+										{{endif}}
+									</div>
+								{{endif}}
+							</div>
+							<div class="ipsColumn ipsColumn_fluid">
+								<h2 class="cReviewCard_name ipsType_reset ipsSpacer_bottom" {{if $order->item->color}}style="color:{$order->item->color};"{{endif}}>
+									{$order->item->name}
+								</h2>
+								<h2 class="cReviewCard_cost ipsType_reset">
+									{$order->cost->currencySymbol}{$order->cost->format}
+								</h2>
+								{{if $order->item->price_detail || $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+									<h3 class="cReviewCard_costDetail ipsType_reset">
+										/
+										{{if $order->item->price_detail}}
+											{$order->item->price_detail}
+										{{elseif $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+											{expression="\IPS\donate\Application::secondsFormat( $order->item->active_length, TRUE )['word']" raw="true"}
+										{{endif}}
+									</h3>
+								{{endif}}
+								<h2 class="cReviewCard_paymentType ipsPos_center ipsSpacer_top ipsSpacer_half">
+									{lang="donate_payment_option_$order->payment_type"}
+								</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="cCheckout_completeMessageDesc ipsPos_center ipsType_normal ipsType_light ipsSpacer_bottom ipsSpacer_double">
+					{{if $order->status === \IPS\donate\Order::STATUS_COMPLETED}}
+						{lang="donate_checkout_complete_success_desc"}
+					{{elseif $order->status === \IPS\donate\Order::STATUS_PENDING}}
+						{lang="donate_checkout_complete_pending_desc"}
+						<div class="cCheckout_completeMessageDescDetail ipsType_neutral ipsType_small ipsType_left ipsType_unbold">
+							{lang="donate_checkout_complete_pending_desc_detail"}
+						</div>
+					{{endif}}
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>]]></template>
+ <template template_group="checkout" template_name="form" template_data="$id, $action, $elements, $hiddenValues, $actionButtons, $uploadField, $class, $attributes, $sidebar, $form, $errorTabs" template_location="front" template_app="donate"><![CDATA[<form id="{$id}" accept-charset="utf-8" action="{$action}" method="post" data-ipsForm data-controller="donate.front.checkout.form">
+	<input type="hidden" name="{$id}_submitted" value="1">
+	{{foreach $hiddenValues as $k => $v}}
+		{{if \is_array($v)}}
+			{{foreach $v as $_k => $_v}}
+				<input type="hidden" name="{$k}[{$_k}]" value="{$_v}">
+			{{endforeach}}
+		{{else}}
+			<input type="hidden" name="{$k}" value="{$v}">
+		{{endif}}
+	{{endforeach}}
+	{{if $sidebar}}
+		<div class="cCheckout_columns ipsColumns ipsColumns_collapseTablet ipsColumns_collapsePhone">
+			<div class="cCheckout_contentColumn ipsColumn ipsColumn_fluid">
+	{{endif}}
+	<div class="ipsBox ipsSpacer_bottom">
+		<ul class="cCheckout_form ipsPad ipsForm {$class} ipsAreaBackground">
+			{{foreach $elements[''] as $k => $input}}
+				<li class="cCheckout_formField ipsAreaBackground_reset" data-checkout-formField="{$k}">
+					<ul>
+						{$input|raw}
+					</ul>
+				</li>
+			{{endforeach}}
+		</ul>
+	</div>
+	<div class="cCheckout_buttons ipsAreaBackground_light ipsClearfix ipsPad">
+		{expression="implode( '', $actionButtons )" raw="true"}
+	</div>
+	{{if $sidebar}}
+		</div>
+	{{endif}}
+	{{if $sidebar}}
+			<div class="cCheckout_sidebarColumn ipsColumn ipsColumn_veryWide">
+				<div class="ipsAreaBackground ipsPad">
+					{expression="implode( '', $sidebar )" raw="true"}
+				</div>
+			</div>
+		</div>
+	{{endif}}
+</form>]]></template>
+ <template template_group="checkout" template_name="gatewayProviders" template_data="$providers" template_location="front" template_app="donate"><![CDATA[<div class="cGatewayProviders">
+	{{$isChecked = \count( $providers ) === 1;}}
+	{{foreach $providers as $provider}}
+		{{$button = $provider->getButton();}}
+		<label for="elGatewayProvider_{$provider->id}">
+			<div class="cGatewayProvider ipsButton ipsButton_normal ipsButton_large" title="{lang='donate_gateway_provider_{$provider->id}'}" {{if isset( $button['background'] )}}style="background: {$button['background']};"{{endif}}>
+				<span class='ipsCustomInput'>
+					<input type="radio" id="elGatewayProvider_{$provider->id}" name="donate_checkout_gateway_providers" value="{$provider->id}" {{if $isChecked}}checked{{endif}}>
+					<span></span>
+				</span>
+				<span>
+					{{if isset( $button['image'] )}}
+						{{$src = $button['image'];}}
+						<img src="{resource='gateway/$provider->id/$src' app='donate' location='front'}">
+					{{elseif isset( $button['content'] )}}
+						{$button['content']}
+					{{endif}}
+				</span>
+			</div>
+		</label>
+	{{endforeach}}
+</div>]]></template>
+ <template template_group="checkout" template_name="gift" template_data="$toggleForm, $memberForm" template_location="front" template_app="donate"><![CDATA[<div class="cGift">
+	<div class="cGift_toggle ipsPos_center">
+		{$toggleForm->html()|raw}
+	</div>
+	<div class="cGift_member ipsPos_center ipsType_center ipsSpacer_top ipsSpacer_double">
+		<div class="ipsType_medium ipsSpacer_bottom ipsSpacer_half">
+			{lang="donate_checkout_gift_member_desc"}
+		</div>
+		{$memberForm->html()|raw}
+	</div>
+</div>]]></template>
+ <template template_group="checkout" template_name="itemCard" template_data="$item, $class='horizontal', $isInput=FALSE, $showPrice=TRUE, $showPerks=TRUE" template_location="front" template_app="donate"><![CDATA[<div class="cItemCard cItemCard_{$class} ipsBox ipsAreaBackground_reset ipsSpacer_bottom" {{if $showPerks && $item->perks_desc}}data-itemCard-hasPerks{{endif}}>
+	{{if $isInput}}
+		<label for="elItem{$item->id}" class="ipsCursor_pointer">
+	{{endif}}
+	{{if $class === 'horizontal'}}
+		<div class="ipsColumns ipsColumns_collapseTablet ipsColumns_collapsePhone">
+			<div class="ipsColumn ipsColumn_veryWide ipsType_center ipsAreaBackground_light ipsPad ipsPad_double">
+	{{endif}}
+		<div class="cItemCard_info {{if $class === 'vertical'}}ipsType_center ipsAreaBackground_light ipsPad ipsPad_double{{endif}}">
+			<h2 class="cItemCard_name ipsType_reset" {{if $item->color}}style="color:{$item->color};"{{endif}}>
+				{$item->name}
+			</h2>
+			{{$canDisplayPrice = !empty( $item->price_detail ) || $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION ) || $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_ONETIME, \IPS\donate\Order::PRICE_TYPE_FIXED );}}
+			{{if $showPrice && $canDisplayPrice}}
+			<div class="cItemCard_price ipsSpacer_top">
+				<h2 class="cItemCard_price ipsType_reset">
+					{$item->price->currencySymbol}{$item->price->format}
+				</h2>
+				{{if $item->price_detail || $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION )}}
+					<h3 class="cItemCard_priceDetail ipsType_reset">
+						/
+						{{if $item->price_detail}}
+							{$item->price_detail}
+						{{elseif $item->hasPaymentOption( \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION )}}
+							{expression="\IPS\donate\Application::secondsFormat( $item->active_length, TRUE )['word']" raw="true"}
+						{{endif}}
+					</h3>
+				{{endif}}
+			</div>
+			{{endif}}
+			<div class="cItemCard_desc ipsPos_center ipsType_break ipsType_contained">
+				{$item->desc|raw}
+			</div>
+			{{if $isInput}}
+				<div class="cItemCard_input ipsSpacer_top ipsType_center">
+						<span class='ipsCustomInput'>
+							<input type='radio' id='elItem{$item->id}' name="donate_checkout_items" value="{$item->id}">
+							<span></span>
+						</span>
+				</div>
+			{{endif}}
+		</div>
+	{{if $class === 'horizontal'}}
+		</div>
+		<div class="ipsColumn ipsColumn_fluid ipsPad ipsPad_double">
+	{{endif}}
+	{{if $showPerks && $item->perks_desc}}
+	<div class="cItemCard_perks {{if $class === 'vertical'}}ipsPad ipsPad_double ipsPos_center{{endif}}">
+		{{if \is_array( $item->perks_desc )}}
+			{{foreach $item->perks_desc as $group}}
+				<div class="cItemCard_perkGroup">
+					<div class="cItemCard_perkTitle">
+						{$group['title']}
+					</div>
+					<ul class="cItemCard_perkCol">
+						{{foreach $group['perks'] as $desc}}
+							<li>
+								{$desc}
+							</li>
+						{{endforeach}}
+					</ul>
+				</div>
+			{{endforeach}}
+		{{else}}
+			{$item->perks_desc}
+		{{endif}}
+	</div>
+	{{endif}}
+	{{if $class === 'horizontal'}}
+		</div>
+	{{endif}}
+	{{if $class === 'horizontal'}}
+		</div>
+	{{endif}}
+	{{if $isInput}}
+		</label>
+	{{endif}}
+</div>]]></template>
+ <template template_group="checkout" template_name="itemCards" template_data="$items" template_location="front" template_app="donate"><![CDATA[<div class="cItemCards ipsPad">
+	{{foreach $items as $item}}
+		{template="itemCard" group="checkout" app="donate" params="$item, 'vertical', TRUE"}
+	{{endforeach}}
+</div>]]></template>
+ <template template_group="checkout" template_name="paymentOptions" template_data="$item, $default=NULL" template_location="front" template_app="donate"><![CDATA[{{$count = \count( $item->payment_options );}}
+{{foreach $item->payment_options as $option}}
+	{{$isChecked = $count === 1 || (string) $option === $default;}}
+	<label for="elPaymentOption_{$option->paymentType}">
+		<div class="cPaymentOption ipsButton ipsButton_normal ipsButton_large">
+			<span class='ipsCustomInput'>
+				{{$isFixed = ( $option->priceType === \IPS\donate\Order::PRICE_TYPE_FIXED );}}
+				{{$isVariable = ( $option->priceType === \IPS\donate\Order::PRICE_TYPE_VARIABLE );}}
+				<input type="radio" id="elPaymentOption_{$option->paymentType}" name="donate_checkout_payment_options" value="{$option}" {{if $isFixed}}data-paymentOption-fixed{{endif}} {{if $isVariable}}data-paymentOption-variable{{endif}} {{if $isChecked}}checked{{endif}}>
+				<span></span>
+			</span>
+			<span>
+				{lang="donate_payment_option_$option->paymentType"}
+			</span>
+		</div>
+	</label>
+{{endforeach}}]]></template>
+ <template template_group="checkout" template_name="providerSmallPrint" template_data="$content" template_location="front" template_app="donate"><![CDATA[<div class="ipsType_small">
+	{$content|raw}
+</div>]]></template>
+ <template template_group="checkout" template_name="reviewCard" template_data="$item, $option, $cost, $details=NULL" template_location="front" template_app="donate"><![CDATA[{template="itemCard" group="checkout" app="donate" params="$item, 'vertical', FALSE, FALSE, FALSE"}
+
+<div class="cReviewCard ipsBox ipsAreaBackground_reset">
+	<div class="cReviewCard_info ipsType_center ipsAreaBackground_light ipsPad ipsPad_double">
+		<h1 class="cReviewCard_cost ipsType_reset">
+			{$cost->currencySymbol}{$cost->format}
+		</h1>
+		{{if $item->price_detail || $option->paymentType === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+			<h3 class="cReviewCard_costDetail ipsType_reset">
+				/
+				{{if $item->price_detail}}
+					{$item->price_detail}
+				{{elseif $option->paymentType === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+					{expression="\IPS\donate\Application::secondsFormat( $item->active_length, TRUE )['word']" raw="true"}
+				{{endif}}
+			</h3>
+		{{endif}}
+		<h2 class="cReviewCard_paymentType ipsPos_center ipsSpacer_top ipsSpacer_half">
+			{lang="donate_payment_option_$option->paymentType"}
+		</h2>
+	</div>
+	{{if $details && \is_array( $details ) && \count( $details ) > 0}}
+		<div class="cReviewCard_details ipsType_normal ipsPad ipsPad_double ipsType_center">
+			{{foreach $details as $detail}}
+				<div>
+					{{if isset( $detail['icon'] )}}
+						<i class="fa fa-{$detail['icon']} fa-lg"></i>
+					{{endif}}
+					{{if isset( $detail['title'] )}}
+						<h4 class="ipsType_reset">
+							{lang="$detail['title']"}
+						</h4>
+					{{elseif isset( $detail['titleHtml'] )}}
+						<div>
+							{$detail['titleHtml']|raw}
+						</div>
+					{{endif}}
+					{{if isset( $detail['content'] )}}
+						<span>{$detail['content']|raw}</span>
+					{{endif}}
+				</div>
+			{{endforeach}}
+		</div>
+	{{endif}}
+</div>]]></template>
+ <template template_group="checkout" template_name="steamAccount" template_data="$method, $linkedProfileData=NULL, $customProfileData=NULL" template_location="front" template_app="donate"><![CDATA[<div class="ipsType_center">
+	<div class="ipsType_medium ipsSpacer_bottom ipsSpacer_half">
+	{lang="donate_checkout_steam_account_login_desc"}
+	</div>
+	{{if $linkedProfileData}}
+		<div id="elSteamAccount_linkedCard">
+			{template="steamAccountCard" group="checkout" app="donate" params="$linkedProfileData, TRUE, !$customProfileData"}
+		</div>
+	{{else}}
+		<a href="{url='app=donate&module=donate&controller=checkout&do=steamLogin&_processLogin=$method->id' csrf='true' seoTemplate='donate_checkout'}" class='cSteamAccount_login ipsButton ipsButton_verySmall ipsSocial {$method->buttonClass()}' style="background-color: {$method->buttonColor()}">
+			<span class='ipsSocial_icon'>
+				<i class='fa fa-steam'></i>
+			</span>
+			<span class='ipsSocial_text'>{lang="$method->buttonText()"}</span>
+		</a>
+	{{endif}}
+	<div class="cSteamAccount_or ipsCursor_default ipsSpacer_both">
+		<h4 class="ipsAreaBackground_reset">
+			{lang="donate_checkout_steam_account_or"}
+		</h4>
+	</div>
+	<div class="ipsType_medium ipsSpacer_bottom ipsSpacer_half">
+		{lang="donate_checkout_steam_account_text_desc"}
+		<div class="ipsType_issue ipsType_small">{lang="donate_checkout_steam_account_text_desc_note"}</div>
+	</div>
+	<div class="cSteamAccount_text ipsPos_center">
+		<span class='ipsSocial_icon ipsCursor_pointer'>
+			<i class='fa fa-search'></i>
+		</span>
+		<input type="text" {{if $customProfileData}}value="{$customProfileData['personaname']}"{{endif}} data-checkout-steamProfileData="{url='app=donate&module=donate&controller=checkout&do=steamprofileData' csrf='true' seoTemplate='donate_checkout'}">
+	</div>
+	<div id="elSteamAccount_customCard" class="ipsSpacer_top ipsSpacer_half" {{if !$customProfileData}}style="display: none;"{{endif}}>
+		{template="steamAccountCard" group="checkout" app="donate" params="$customProfileData ?: array( 'personaname' => '', 'steamid64' => '', 'steamid2' => '', 'avatarfull' => '' ), TRUE, $customProfileData !== NULL"}
+	</div>
+</div>]]></template>
+ <template template_group="checkout" template_name="steamAccountCard" template_data="$profileData, $isInput=TRUE, $isChecked=FALSE" template_location="front" template_app="donate"><![CDATA[{{if $isInput}}
+	<label class="ipsCursor_pointer">
+{{endif}}
+	<div class="cSteamAccount_card ipsPos_center ipsType_left ipsAreaBackground_dark ipsAreaBackground_rounded">
+		{{if $isInput}}
+			<input type="radio" name="donate_checkout_steam_account" value="{$profileData['steamid64']}" {{if $isChecked}}checked{{endif}}>
+		{{endif}}
+		<span class='ipsSocial_icon'>
+			<i class='fa fa-steam'></i>
+		</span>
+		<div class="cSteamAccount_cardPanel">
+			<img src="{$profileData['avatarfull']}" alt="" class="ipsUserPhoto ipsUserPhoto_mini">
+			<div class="cSteamAccount_cardInfo">
+				<div class="cSteamAccount_cardInfoName">{$profileData['personaname']}</div>
+				<div class="cSteamAccount_cardInfoId">{$profileData['steamid2']}</div>
+			</div>
+		</div>
+	</div>
+{{if $isInput}}
+	</label>
+{{endif}}]]></template>
+ <template template_group="checkout" template_name="wizard" template_data="$stepNames, $activeStep, $output, $baseUrl, $showSteps" template_location="front" template_app="donate"><![CDATA[<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="donate_checkout"}</h1>
+</div>
+
+<div class="cCheckout_wizard ipsWizard" data-ipsWizard>
+	{{if $showSteps}}
+		<div class="cCheckout_wizardSteps ipsAreaBackground_light ipsCursor_default ipsSpacer_bottom">
+			<ul class="ipsStepBar ipsClearFix" data-role="wizardStepbar">
+				{{foreach $stepNames as $step => $name}}
+					<li class="ipsStep {{if $activeStep === $name}}ipsStep_active{{endif}}">
+						<span>
+							<strong class="ipsStep_title">{lang="step_number" sprintf="$step + 1"}</strong>
+							<span class="ipsStep_desc">{lang="donate_checkout_$name"}</span>
+						</span>
+					</li>
+				{{endforeach}}
+			</ul>
+		</div>
+	{{endif}}
+	<div data-role="wizardContent">
+		{$output|raw}
+	</div>
+</div>]]></template>
+ <template template_group="donationlist" template_name="latestRows" template_data="$table, $headers, $rows" template_location="front" template_app="donate"><![CDATA[{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		<div class="ipsDataItem_generic ipsDataItem_size10">
+			{lang="{$table->langPrefix}member"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size9">
+			{lang="{$table->langPrefix}amount"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size9">
+			{lang="{$table->langPrefix}date"}
+		</div>
+	</li>
+	{{foreach $rows as $row}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			<div class="ipsDataItem_icon ipsDataItem_size1">
+				{template="userPhoto" app="core" group="global" params="$row['member'], 'tiny'"}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{$row['member']->link()|raw}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{$row['amount']->currencySymbol}{$row['amount']->format}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{datetime="$row['date']"}
+			</div>
+		</li>
+	{{endforeach}}
+{{endif}}]]></template>
+ <template template_group="donationlist" template_name="topRows" template_data="$table, $headers, $rows" template_location="front" template_app="donate"><![CDATA[{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		<div class="ipsDataItem_generic ipsDataItem_size10">
+			{lang="{$table->langPrefix}member"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size9">
+			{lang="{$table->langPrefix}total"}
+		</div>
+	</li>
+	{{foreach $rows as $row}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			<div class="ipsDataItem_icon ipsDataItem_size1">
+				{template="userPhoto" app="core" group="global" params="$row['member_id'], 'tiny'"}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{$row['member_id']->link()|raw}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{$row['donation_total']->currencySymbol}{$row['donation_total']->format}
+			</div>
+		</li>
+	{{endforeach}}
+{{endif}}]]></template>
+ <template template_group="global" template_name="delayedRedirect" template_data="$url, $delay=1, $height=400" template_location="front" template_app="donate"><![CDATA[<meta http-equiv="refresh" content="$delay; url='{$url}'">
+<div data-role="loading" class="ipsLoading" style="height: {$height}px"></div>]]></template>
+ <template template_group="global" template_name="page" template_data="$title, $output" template_location="front" template_app="donate"><![CDATA[<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="$title"}</h1>
+</div>
+
+<div>
+	{$output|raw}
+</div>]]></template>
+ <template template_group="global" template_name="tabs" template_data="$tabNames, $activeId, $defaultContent, $urlArray, $parseNames=TRUE, $contained=FALSE, $extraClasses=''" template_location="front" template_app="donate"><![CDATA[{{$url = \IPS\Http\Url::internal( $urlArray[0], 'front', $urlArray[1] );}}
+<div class='ipsTabs ipsClearfix{{if $extraClasses}} {$extraClasses}{{endif}}' id='elTabs_{expression="md5( $url )"}' data-ipsTabBar data-ipsTabBar-contentArea='#ipsTabs_content_{expression="md5( $url )"}' {{if \IPS\Request::i()->isAjax()}}data-ipsTabBar-updateURL='false'{{endif}}>
+	<a href='#elTabs_{expression="md5( $url )"}' {{if \count( $tabNames ) > 1}}data-action='expandTabs'><i class='fa fa-caret-down'></i>{{else}}>{{endif}}</a>
+	<ul role='tablist'>
+		{{foreach $tabNames as $i => $name}}
+			<li>
+				<a href='{url="{$urlArray[0]}&tab=$i" base="front" seoTemplate="$urlArray[1]_$i"}' id='{expression="md5( $url )"}_tab_{$i}' class="ipsTabs_item {{if $i == $activeId}}ipsTabs_activeItem{{endif}}" title='{{if $parseNames}}{striptags="\IPS\Member::loggedIn()->language()->get( $name )"}{{else}}{striptags="$name"}{{endif}}' role="tab" aria-selected="{{if $i == $activeId}}true{{else}}false{{endif}}">
+					{{if $parseNames}}{lang="$name"}{{else}}{$name|raw}{{endif}}
+				</a>
+			</li>
+		{{endforeach}}
+	</ul>
+</div>
+<section id='ipsTabs_content_{expression="md5( $url )"}' class='ipsTabs_panels {{if $contained}}ipsTabs_contained{{endif}}'>
+	{{foreach $tabNames as $i => $name}}
+		{{if $i == $activeId}}
+			<div id='ipsTabs_elTabs_{expression="md5( $url )"}_{expression="md5( $url )"}_tab_{$i}_panel' class="ipsTabs_panel" aria-labelledby="{expression="md5( $url )"}_tab_{$i}" aria-hidden="false">
+				{$defaultContent|raw}
+			</div>
+		{{endif}}
+	{{endforeach}}
+</section>]]></template>
+ <template template_group="items" template_name="name" template_data="$name, $color=NULL, $bold=TRUE" template_location="admin" template_app="donate"><![CDATA[<span {{if $color}}style="color: {$color};"{{endif}}>
+	{{if $bold}}<strong>{{endif}}
+	{$name}
+	{{if $bold}}</strong>{{endif}}
+</span>]]></template>
+ <template template_group="items" template_name="perks" template_data="$perks" template_location="admin" template_app="donate"><![CDATA[{{foreach $perks as $perk}}
+	<span class="ipsBadge ipsBadge_neutral">{lang="donate_items_perk_$perk->id"}</span>
+{{endforeach}}]]></template>
+ <template template_group="mydonations" template_name="overview" template_data="$elements" template_location="front" template_app="donate"><![CDATA[{{if \count( $elements )}}
+	{{foreach $elements as $k => $element}}
+		<div {{if $k !== 0}}class="ipsSpacer_top ipsSpacer_double"{{endif}}>
+			{$element|raw}
+		</div>
+	{{endforeach}}
+{{else}}
+	<div class='ipsType_center ipsPad'>
+		<p class='ipsType_large ipsType_light'>{lang="no_rows_in_table"}</p>
+	</div>
+{{endif}}]]></template>
+ <template template_group="mydonations" template_name="overviewRows" template_data="$langPrefix, $rows, $headers" template_location="front" template_app="donate"><![CDATA[{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		{{if isset( $headers['item'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size7">
+				{lang="{$langPrefix}item"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['type'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size7">
+				{lang="{$langPrefix}type"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['cost'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size5">
+				{lang="{$langPrefix}cost"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['order'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size6">
+				{lang="{$langPrefix}order"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['expires'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size6">
+				{lang="{$langPrefix}expiresrenews"}
+			</div>
+		{{elseif isset( $headers['date'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size6">
+				{lang="{$langPrefix}date"}
+			</div>
+		{{endif}}
+	</li>
+	{{foreach $rows as $row}}
+		{{$order = isset( $row['order'] ) ? $row['order'] : NULL;}}
+		{{$purchase = isset( $row['purchase'] ) ? $row['purchase'] : NULL;}}
+		{{$item = $order ? $order->item : $purchase->item;}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			{{if isset( $headers['item'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size7 ipsType_large">
+					<strong style="color: {$item->color};">{$item->name}</strong>
+				</div>
+			{{endif}}
+			{{if isset( $headers['type'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size7">
+					{{if $order}}
+						{lang="donate_payment_option_{$order->payment_type}"}
+					{{endif}}
+				</div>
+			{{endif}}
+			{{if isset( $headers['cost'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size5">
+					{{if $order}}
+						{$order->cost->currencySymbol}{$order->cost->format}
+						{{if $item->price_detail || $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+							/
+							{{if $item->price_detail}}
+								{$item->price_detail}
+							{{elseif $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+								{expression="\IPS\donate\Application::secondsFormat( $item->active_length, TRUE )['word']" raw="true"}
+							{{endif}}
+						{{endif}}
+					{{endif}}
+				</div>
+			{{endif}}
+			{{if isset( $headers['order'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size6 ipsType_small">
+					{{if $order}}
+						{$order->token}
+					{{endif}}
+				</div>
+			{{endif}}
+			{{if isset( $headers['expires'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size6">
+					{{$tooltip = '';}}
+					{{if $order && $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION && $order->status === \IPS\donate\Order::STATUS_COMPLETED}}
+						{{$tooltip = \IPS\Member::loggedIn()->language()->addToStack( $langPrefix . 'renews');}}
+					{{else}}
+						{{$tooltip = \IPS\Member::loggedIn()->language()->addToStack( $langPrefix . 'expires');}}
+					{{endif}}
+					{{$tooltip .= ' ' . $purchase->deactivate_date->localeDate();}}
+					<span title="{$tooltip}" data-ipsTooltip>{$purchase->deactivate_date->relative()}</span>
+				</div>
+			{{elseif isset( $headers['date'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size6">
+					{{$date = $order ? $order->date : $purchase->date;}}
+					{datetime="$date"}
+				</div>
+			{{endif}}
+			{{if isset( $headers['giftee'] ) && $order && $order->giftee}}
+				<div class="ipsDataItem_generic">
+					<i class="fa fa-gift fa-lg"></i>&nbsp;
+					{{if $order->giftee->member_id !== \IPS\Member::loggedIn()->member_id}}
+						<span class="ipsType_small ipsType_light">
+							{lang="donate_mydonations_gift_for"}
+						</span>&nbsp;
+						{$order->giftee->link()|raw}
+					{{else}}
+						<span class="ipsType_small ipsType_light">
+							{lang="donate_mydonations_gift_from"}
+						</span>&nbsp;
+						{$order->member->link()|raw}
+					{{endif}}
+				</div>
+			{{endif}}
+		</li>
+	{{endforeach}}
+{{endif}}]]></template>
+ <template template_group="mydonations" template_name="overviewTable" template_data="$title, $langPrefix, $rows, $headers=array( 'item' =&gt; 1, 'type' =&gt; 1, 'cost' =&gt; 1, 'order' =&gt; 1, 'expires' =&gt; 1, 'giftee' =&gt; 1 )" template_location="front" template_app="donate"><![CDATA[<div>
+	<h2 class="ipsType_sectionTitle ipsType_reset ipsClear">{lang="$title"}</h2>
+	<ol class="ipsDataList ipsClear">
+		{template="overviewRows" group="mydonations" app="donate" params="$langPrefix, $rows, $headers"}
+	</ol>
+</div>]]></template>
+ <template template_group="mydonations" template_name="paymentsRows" template_data="$table, $headers, $rows" template_location="front" template_app="donate"><![CDATA[{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		<div class="ipsDataItem_generic ipsDataItem_size6">
+			{lang="{$table->langPrefix}amount"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}item"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}type"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}order"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}date"}
+		</div>
+	</li>
+	{{foreach $rows as $row}}
+		{{$order = isset( $row['order'] ) ? $row['order'] : NULL;}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			<div class="ipsDataItem_generic ipsDataItem_size6 ipsType_large">
+				{$row['amount']->currencySymbol}{$row['amount']->format}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8">
+				{{if $order}}
+					<span style="color: {$order->item->color};">{$order->item->name}</span>
+				{{endif}}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8">
+				{{if $order}}
+					{lang="donate_payment_option_{$order->payment_type}"}
+				{{endif}}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8 ipsType_small">
+				{{if $order}}
+					{$order->token}
+				{{endif}}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8">
+				{datetime="$row['date']"}
+			</div>
+		</li>
+	{{endforeach}}
+{{endif}}]]></template>
+ <template template_group="subscriptions" template_name="active" template_data="$active" template_location="admin" template_app="donate"><![CDATA[<span style="width: 70px;" class="ipsType_center ipsBadge {{if $active}}ipsBadge_positive{{else}}ipsBadge_intermediary{{endif}}">
+	{{if $active}}
+		{lang="donate_subscriptions_active"}
+	{{else}}
+		{lang="donate_subscriptions_inactive"}
+	{{endif}}
+</span>]]></template>
+ <template template_group="transactions" template_name="status" template_data="$status" template_location="admin" template_app="donate"><![CDATA[<span style="width: 70px;" class="ipsType_center ipsBadge {{if $status === 'paid'}}ipsBadge_positive{{elseif $status === 'refunded'}}ipsBadge_intermediary{{else}}ipsBadge_negative{{endif}}">
+	{lang="donate_transactions_status_$status"}
+</span>]]></template>
+ <template template_group="widgets" template_name="donationGoal" template_data="$donations, $orientation='vertical'" template_location="front" template_app="donate"><![CDATA[<h3 class='ipsType_reset ipsWidget_title'>{lang="block_donationGoal"}</h3>
+{{if $donations && \count( $donations )}}
+	<div class='ipsWidget_inner ipsPad ipsType_center'>
+		<div class="ipsType_normal ipsType_light ipsType_uppercase ipsSpacer_bottom ipsSpacer_half">
+			{lang="block_donationGoal_month" sprintf="date('F')"}
+		</div>
+		<div class="ipsType_sectionHead ipsSpacer_bottom ipsSpacer_half">
+			<strong class="{{if $donations['total']->isGreaterThanOrEqualTo( $donations['goal'] )}}ipsType_success{{endif}}">
+				{$donations['total']->currencySymbol}{number="$donations['total']->rawFormat"}
+			</strong>
+			/
+			<span class="ipsType_normal ipsType_light">
+				{$donations['goal']->currencySymbol}{number="$donations['goal']->rawFormat"}
+			</span>
+		</div>
+		<div class="ipsProgressBar ipsProgressBar_fullWidth ipsClear">
+			<div class="ipsProgressBar_progress" style="width: {$donations['percentage']}%; max-width: 100%;">
+				<span data-role="percentage">{number="$donations['percentage']"}</span>%
+			</div>
+		</div>
+		<div class="ipsSpacer_top">
+			<a class="ipsButton ipsButton_medium ipsButton_fullWidth ipsButton_important" href="{url='app=donate&module=donate&controller=checkout' seoTemplate='donate_checkout'}">
+				{lang="block_donationGoal_donate"}
+			</a>
+		</div>
+	</div>
+{{endif}}]]></template>
+ <css css_location="front" css_app="donate" css_attributes="" css_path="." css_name="checkout_responsive.css"><![CDATA[
+/* BOTH */
+@media screen and (max-width: 979px) {
+	.ipsStep:not(.ipsStep_active) {
+		display: none;
+	}
+	
+	.cCheckout_columns {
+		display: flex !important;
+    flex-wrap: wrap;
+	}
+	
+	.cCheckout_contentColumn {
+		order: 2;
+	}
+	
+	.cCheckout_sidebarColumn {
+		order: 1;
+	}
+	
+	.cCheckout_sidebarColumn .cItemCard_perks {
+		display: none;
+	}
+	
+	.cCheckout_buttons {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+	
+	.cCheckout_buttons .ipsButton {
+		margin-bottom: 15px;
+	}
+	
+	.cItemCard {
+		height: inherit;
+		margin: 0;
+	}
+	
+	.cItemCards .cItemCard_vertical {
+		width: 100%;
+		margin-bottom: 15px;
+		margin-right: 0;
+	}
+	
+	.cItemCards .cItemCard_vertical:last-of-type {
+		margin-bottom: 0;
+		margin-right: 0;
+	}
+	
+	.cItemCard_info {
+		padding: 14px;
+	}
+	
+	.cItemCards .cItemCard_vertical .cItemCard_info {
+		height: unset;
+	}
+	
+	.cItemCard_name {
+		text-align: center;
+	}
+	
+	.cItemCard_desc {
+		font-size: 16px;
+	}
+	
+	.cItemCard_perks {
+		text-align: center;
+		padding: 0 14px 0 14px;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perks {
+		display: block;
+	}
+	
+	.cItemCard_perkGroup:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perkGroup:first-of-type {
+		padding-left: 0;
+	}
+	
+	.cItemCard_perkGroup {
+		margin-bottom: 15px;
+		height: inherit;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perkGroup {
+		border-left: none;
+		padding-left: 0;
+	}
+	
+	.cItemCard_horizontal .cItemCard_perkGroup:not(:first-child) {
+		border-top: 2px solid rgba(0, 0, 0, 0.05);
+		margin-top: 10px;
+		padding-top: 10px;
+	}
+	
+	.cItemCard_perkTitle {
+		font-size: 18px;
+		margin: 0;
+	}
+	
+	.cItemCard_perkCol > li {
+		min-height: auto;
+		font-size: 14px;
+		margin: 5px 15px 0 15px;
+	}
+	
+	.cItemCards .cItemCard_vertical .cItemCard_input {
+		position: relative;
+		left: unset;
+		bottom: unset;
+	}
+	
+	.cPaymentOption {
+		display: block !important;
+		position: relative;
+	}
+	
+	.cPaymentOption:first-of-type {
+		margin-right: unset;
+		margin-left: unset;
+		margin-bottom: 15px;
+	}
+	
+	.cPaymentOption .ipsCustomInput {
+		position: absolute;
+		top: 15px;
+		left: 22px;
+	}
+	
+	.cCheckout_complete i.fa {
+		display: block;
+	}
+	
+	.cCheckout_completeOrder, .cCheckout_completeMessageDesc {
+		width: 80%;
+	}
+	
+	.cCheckout_completeOrder .ipsColumn:first-child {
+		border-right: none;
+	}
+	
+	.cCheckout_completeMessageDescDetail {
+		text-align: unset;
+	}
+}]]></css>
+ <css css_location="front" css_app="donate" css_attributes="" css_path="." css_name="checkout.css"><![CDATA[
+.cCheckout_wizardSteps {
+	width: 100%;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cCheckout_wizardSteps .ipsStepBar {
+	width: fit-content;
+	margin: 0 auto;
+	background: unset;
+}
+
+.cCheckout_wizardSteps .ipsStep {
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+.cCheckout_formField {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.cCheckout_formField:not(:first-child) {
+	border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.cCheckout_formField:first-child {
+	padding-top: 20px;
+}
+
+.cCheckout_formField:last-child {
+	padding-bottom: 20px;
+}
+
+.cCheckout_formField[data-checkout-formfield="donate_checkout_items"] {
+	padding: 0;
+}
+
+.cCheckout_formField[data-checkout-formfield="donate_checkout_items"] > ul, .cCheckout_formField[data-checkout-formfield="donate_checkout_items"] .ipsFieldRow_content {
+	width: 100%;
+}
+
+.cCheckout_formField > ul {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+
+.cCheckout_formField .ipsFieldRow_label {
+	text-align: center !important;
+	font-size: 22px !important;
+	font-weight: 500 !important;
+	margin-bottom: 20px  !important;
+	padding-top: 0 !important;
+}
+
+.cCheckout_formField .ipsFieldRow_label[for="donate_checkout_items"] {
+	display: none;
+}
+
+.cCheckout_formField .ipsFieldRow_content {
+	width: fit-content;
+}
+
+.cCheckout_formField .ipsFieldRow_content > * {
+	margin: 0 auto;
+}
+
+.cCheckout_numberField, .cCheckout_numberField input {
+	vertical-align: middle;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.cItemCards {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.cItemCard {
+	width: 100%;
+}
+
+.cItemCards .cItemCard_vertical {
+	width: 275px;
+	margin-bottom: 0;
+}
+
+.cItemCards .cItemCard_vertical:last-of-type {
+	margin-right: 0;
+}
+
+.cItemCard:last-of-type {
+	margin-bottom: 0;
+}
+
+.cItemCard > label {
+	display: block;
+	height: 100%;
+}
+
+.cItemCard_info {
+	position: relative;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_info {
+	height: 200px;
+}
+
+.cItemCard[data-itemCard-hasPerks].cItemCard_vertical .cItemCard_info {
+	padding-bottom: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.cItemCard_name {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_name {
+	font-size: 22px;
+}
+
+.cItemCard_priceBox {
+	height: 25px;
+}
+
+.cItemCard_desc {
+	overflow: none;
+	width: 80%;
+	font-size: 13px;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_desc {
+	width: unset;
+}
+
+.cItemCard_perks {
+	width: 100%;
+}
+
+.cItemCard_horizontal .cItemCard_perks {
+	display: flex;
+}
+
+.cItemCard_vertical .cItemCard_perks {
+	width: fit-content;
+	padding-top: 15px;
+}
+
+.cItemCard_perkGroup {
+	display: block;
+	white-space: initial;
+	margin-top: 5px;
+}
+
+.cItemCard_horizontal .cItemCard_perkGroup {
+	border-left: 1px solid rgba(0, 0, 0, 0.125);
+	padding-left: 20px;
+	flex: 1;
+}
+
+.cItemCard_horizontal .cItemCard_perkGroup:first-of-type {
+	border-left: none;
+	padding-left: 0;
+}
+
+.cItemCard_vertical .cItemCard_perkGroup {
+	margin-top: 0;
+}
+
+.cItemCard_vertical .cItemCard_perkGroup:not(:first-child) {
+	border-top: 2px solid rgba(0, 0, 0, 0.05);
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+.cItemCard_perkTitle {
+	font-size: 14px;
+	font-weight: 600;
+	margin-left: 5px;
+}
+
+.cItemCard_vertical .cItemCard_perkTitle {
+	text-align: center;
+}
+
+.cItemCard_perkCol {
+	margin: 0;
+	padding: 0;
+}
+
+.cItemCard_perkCol > li {
+	font-size: 12px;
+	margin: 5px 15px 0 15px;
+	list-style: none;
+}
+
+.cItemCard_perkCol > li:before {
+	content: '+';
+	position: relative;
+	margin-left: -15px;
+	margin-right: 5px;
+	font-weight: 600;
+}
+
+.cItemCard_price, .cReviewCard_cost {
+	display: inline-block;
+	font-size: 28px;
+	font-weight: 500;
+}
+
+.cItemCard_priceDetail, .cReviewCard_costDetail {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_input {
+	position: absolute;
+	left: 48%;
+	bottom: 15px;
+}
+
+.cPaymentOption {
+	width: 212px;
+}
+
+.cPaymentOption:first-of-type {
+	margin-right: 5px;
+}
+
+.cPaymentOption:last-of-type {
+	margin-left: 5px;
+}
+
+.cPaymentOption span {
+	vertical-align: middle;
+}
+
+.cPaymentOption .ipsCustomInput {
+	margin-right: 10px;
+}
+
+.cGift, .cGift_member {
+	width: 260px;
+}
+
+.cGift_toggle {
+	width: fit-content;
+}
+
+.cSteamAccount_login, .cSteamAccount_card, .cSteamAccount_text {
+	width: 260px;
+}
+
+.cSteamAccount_login {
+	overflow: hidden;
+}
+
+.cSteamAccount_card {
+	position: relative;
+	height: 62px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 2px solid rgba(0,0,0,0.3);
+	background: #171a21;
+}
+
+.cSteamAccount_card input {
+	display: none;
+}
+
+.cSteamAccount_card .ipsSocial_icon, .cSteamAccount_cardPanel, .cSteamAccount_cardInfo {
+	display: inline-block;
+}
+
+.cSteamAccount_card .ipsSocial_icon {
+	text-align: center;
+	height: 100%;
+	vertical-align: top;
+	background: rgba(0,0,0,0.3);
+}
+
+.cSteamAccount_card .ipsSocial_icon i {
+	position: relative;
+	top: 22px;
+	opacity: 0.05;
+}
+
+.cSteamAccount_card .ipsUserPhoto {
+	float: unset;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.cSteamAccount_cardPanel {
+	height: 100%;
+	width: 86%;
+	padding: 6px 0 6px 0;
+	opacity: 0.4;
+}
+
+.cSteamAccount_card input:hover ~ .cSteamAccount_cardPanel, .cSteamAccount_card input:hover ~ .ipsSocial_icon i {
+	opacity: 0.8;
+}
+
+.cSteamAccount_card input:checked ~ .cSteamAccount_cardPanel, .cSteamAccount_card input:checked ~ .ipsSocial_icon i {
+	opacity: 1;
+}
+
+.cSteamAccount_card:hover {
+	filter: brightness(1.1);
+}
+
+.cSteamAccount_card:active {
+	filter: brightness(1.2);
+}
+
+.cSteamAccount_cardInfo {
+	vertical-align: middle;
+}
+
+.cSteamAccount_cardInfoName {
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.cSteamAccount_cardInfoId {
+	font-size: 12px;
+	opacity: 0.9;
+}
+
+.cSteamAccount_or {
+	position: relative;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.cSteamAccount_or > h4 {
+	position: relative;
+	width: 40px;
+	margin: 0 auto;
+	z-index: 2;
+}
+
+.cSteamAccount_or:after {
+	border-top: 1px solid rgba(0, 0, 0, 0.15);
+	content: '';
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	z-index: 1;
+}
+
+.cSteamAccount_text {
+	position: relative;
+	height: 38px;
+}
+
+.cSteamAccount_text .ipsSocial_icon {
+	display: inline-block;
+	text-align: center;
+	position: absolute;
+	height: 100%;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.cSteamAccount_text .ipsSocial_icon i {
+	position: relative;
+	top: 10px;
+}
+
+.cSteamAccount_text input[type="text"] {
+	font-size: 15px;
+	font-weight: 500;
+	padding-left: 40px !important;
+	height: 100%;
+}
+
+.cReviewCard_info {
+	padding-bottom: 15px;
+}
+
+.cReviewCard_name {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.cReviewCard_paymentType {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.cReviewCard_details {
+	padding-top: 15px;
+}
+
+.cReviewCard_details > div:not(:first-child) {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.cGatewayProviders > label {
+	display: block;
+}
+
+.cGatewayProviders > label:not(:first-child) {
+	margin-top: 15px;
+}
+
+.cGatewayProvider {
+	width: 262px;
+	position: relative;
+	display: block !important;
+}
+
+.cGatewayProvider:hover {
+	filter: brightness(1.1);
+}
+
+.cGatewayProvider:active {
+	filter: brightness(1.2);
+}
+
+.cGatewayProvider span {
+	vertical-align: middle;
+}
+
+.cGatewayProvider > span > img {
+	height: 25px;
+}
+
+.cGatewayProvider .ipsCustomInput {
+	position: absolute;
+	top: 15px;
+	left: 35px;
+}
+
+.cCheckout_completeOrder {
+	width: 50%;
+}
+
+.cCheckout_completeOrder .ipsColumn:first-child {
+	border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.cCheckout_completeMessageDesc {
+	width: fit-content;
+}
+
+.cCheckout_completeMessageDescDetail {
+	text-align: left;
+}]]></css>
+ <resource name="paypal_logo_small.png" app="donate" location="front" path="/gateway/paypal/">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</resource>
+</theme>

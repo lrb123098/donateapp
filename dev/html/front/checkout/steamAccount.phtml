@@ -1,0 +1,36 @@
+<ips:template parameters="$method, $linkedProfileData=NULL, $customProfileData=NULL" />
+<div class="ipsType_center">
+	<div class="ipsType_medium ipsSpacer_bottom ipsSpacer_half">
+	{lang="donate_checkout_steam_account_login_desc"}
+	</div>
+	{{if $linkedProfileData}}
+		<div id="elSteamAccount_linkedCard">
+			{template="steamAccountCard" group="checkout" app="donate" params="$linkedProfileData, TRUE, !$customProfileData"}
+		</div>
+	{{else}}
+		<a href="{url='app=donate&module=donate&controller=checkout&do=steamLogin&_processLogin=$method->id' csrf='true' seoTemplate='donate_checkout'}" class='cSteamAccount_login ipsButton ipsButton_verySmall ipsSocial {$method->buttonClass()}' style="background-color: {$method->buttonColor()}">
+			<span class='ipsSocial_icon'>
+				<i class='fa fa-steam'></i>
+			</span>
+			<span class='ipsSocial_text'>{lang="$method->buttonText()"}</span>
+		</a>
+	{{endif}}
+	<div class="cSteamAccount_or ipsCursor_default ipsSpacer_both">
+		<h4 class="ipsAreaBackground_reset">
+			{lang="donate_checkout_steam_account_or"}
+		</h4>
+	</div>
+	<div class="ipsType_medium ipsSpacer_bottom ipsSpacer_half">
+		{lang="donate_checkout_steam_account_text_desc"}
+		<div class="ipsType_issue ipsType_small">{lang="donate_checkout_steam_account_text_desc_note"}</div>
+	</div>
+	<div class="cSteamAccount_text ipsPos_center">
+		<span class='ipsSocial_icon ipsCursor_pointer'>
+			<i class='fa fa-search'></i>
+		</span>
+		<input type="text" {{if $customProfileData}}value="{$customProfileData['personaname']}"{{endif}} data-checkout-steamProfileData="{url='app=donate&module=donate&controller=checkout&do=steamprofileData' csrf='true' seoTemplate='donate_checkout'}">
+	</div>
+	<div id="elSteamAccount_customCard" class="ipsSpacer_top ipsSpacer_half" {{if !$customProfileData}}style="display: none;"{{endif}}>
+		{template="steamAccountCard" group="checkout" app="donate" params="$customProfileData ?: array( 'personaname' => '', 'steamid64' => '', 'steamid2' => '', 'avatarfull' => '' ), TRUE, $customProfileData !== NULL"}
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<ips:template parameters="$stepNames, $activeStep, $output, $baseUrl, $showSteps" />
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="donate_checkout"}</h1>
+</div>
+
+<div class="cCheckout_wizard ipsWizard" data-ipsWizard>
+	{{if $showSteps}}
+		<div class="cCheckout_wizardSteps ipsAreaBackground_light ipsCursor_default ipsSpacer_bottom">
+			<ul class="ipsStepBar ipsClearFix" data-role="wizardStepbar">
+				{{foreach $stepNames as $step => $name}}
+					<li class="ipsStep {{if $activeStep === $name}}ipsStep_active{{endif}}">
+						<span>
+							<strong class="ipsStep_title">{lang="step_number" sprintf="$step + 1"}</strong>
+							<span class="ipsStep_desc">{lang="donate_checkout_$name"}</span>
+						</span>
+					</li>
+				{{endforeach}}
+			</ul>
+		</div>
+	{{endif}}
+	<div data-role="wizardContent">
+		{$output|raw}
+	</div>
+</div>

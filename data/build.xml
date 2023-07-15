@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build>
+ <module key="front/donate"><![CDATA[{"default_controller":"","protected":0}]]></module>
+ <module key="admin/settings"><![CDATA[{"default_controller":"","protected":0}]]></module>
+ <module key="admin/donations"><![CDATA[{"default_controller":"","protected":0}]]></module>
+ <task frequency="P0Y0M0DT1H0M0S">pendingorders</task>
+ <task frequency="P0Y0M0DT0H10M0S">expiredpurchases</task>
+ <setting key="donate_csgostore_db_database"><![CDATA[{"key":"donate_csgostore_db_database","default":""}]]></setting>
+ <setting key="donate_csgostore_db_host"><![CDATA[{"key":"donate_csgostore_db_host","default":""}]]></setting>
+ <setting key="donate_csgostore_db_pass"><![CDATA[{"key":"donate_csgostore_db_pass","default":""}]]></setting>
+ <setting key="donate_csgostore_db_port"><![CDATA[{"key":"donate_csgostore_db_port","default":""}]]></setting>
+ <setting key="donate_csgostore_db_user"><![CDATA[{"key":"donate_csgostore_db_user","default":""}]]></setting>
+ <setting key="donate_donation_goal"><![CDATA[{"key":"donate_donation_goal","default":""}]]></setting>
+ <setting key="donate_log_enabled"><![CDATA[{"key":"donate_log_enabled","default":"1"}]]></setting>
+ <setting key="donate_paypal_api_live_clientid"><![CDATA[{"key":"donate_paypal_api_live_clientid","default":""}]]></setting>
+ <setting key="donate_paypal_api_live_secret"><![CDATA[{"key":"donate_paypal_api_live_secret","default":""}]]></setting>
+ <setting key="donate_paypal_api_sandbox_clientid"><![CDATA[{"key":"donate_paypal_api_sandbox_clientid","default":""}]]></setting>
+ <setting key="donate_paypal_api_sandbox_enabled"><![CDATA[{"key":"donate_paypal_api_sandbox_enabled","default":"0"}]]></setting>
+ <setting key="donate_paypal_api_sandbox_secret"><![CDATA[{"key":"donate_paypal_api_sandbox_secret","default":""}]]></setting>
+ <setting key="donate_paypal_email"><![CDATA[{"key":"donate_paypal_email","default":""}]]></setting>
+ <setting key="donate_paypal_ipn_enabled"><![CDATA[{"key":"donate_paypal_ipn_enabled","default":"1"}]]></setting>
+ <setting key="donate_paypal_webhook_enabled"><![CDATA[{"key":"donate_paypal_webhook_enabled","default":"0"}]]></setting>
+ <setting key="donate_paypal_webhook_id"><![CDATA[{"key":"donate_paypal_webhook_id","default":""}]]></setting>
+ <setting key="donate_provider_smallprint"><![CDATA[{"key":"donate_provider_smallprint","default":""}]]></setting>
+ <setting key="donate_sourcebans_db_database"><![CDATA[{"key":"donate_sourcebans_db_database","default":""}]]></setting>
+ <setting key="donate_sourcebans_db_host"><![CDATA[{"key":"donate_sourcebans_db_host","default":""}]]></setting>
+ <setting key="donate_sourcebans_db_pass"><![CDATA[{"key":"donate_sourcebans_db_pass","default":""}]]></setting>
+ <setting key="donate_sourcebans_db_port"><![CDATA[{"key":"donate_sourcebans_db_port","default":""}]]></setting>
+ <setting key="donate_sourcebans_db_user"><![CDATA[{"key":"donate_sourcebans_db_user","default":""}]]></setting>
+ <setting key="donate_sourcebans_groups"><![CDATA[{"key":"donate_sourcebans_groups","default":""}]]></setting>
+ <widget key="donationGoal"><![CDATA[{"class":"\\IPS\\Widget\\StaticCache","restrict":["sidebar","cms"],"default_area":"","allow_reuse":true,"menu_style":"menu","embeddable":true}]]></widget>
+ <hook key="member"><![CDATA[{"type":"C","class":"\\IPS\\Member"}]]></hook>
+ <hook key="usermenu"><![CDATA[{"type":"S","class":"\\IPS\\Theme\\class_core_front_global"}]]></hook>
+ <hook key="steamlogin"><![CDATA[{"type":"C","class":"\\IPS\\steamlogin\\sources\\Login\\Steam"}]]></hook>
+</build>

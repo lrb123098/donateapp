@@ -1,0 +1,108 @@
+<ips:template parameters="$langPrefix, $rows, $headers" />
+{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		{{if isset( $headers['item'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size7">
+				{lang="{$langPrefix}item"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['type'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size7">
+				{lang="{$langPrefix}type"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['cost'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size5">
+				{lang="{$langPrefix}cost"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['order'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size6">
+				{lang="{$langPrefix}order"}
+			</div>
+		{{endif}}
+		{{if isset( $headers['expires'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size6">
+				{lang="{$langPrefix}expiresrenews"}
+			</div>
+		{{elseif isset( $headers['date'] )}}
+			<div class="ipsDataItem_generic ipsDataItem_size6">
+				{lang="{$langPrefix}date"}
+			</div>
+		{{endif}}
+	</li>
+	{{foreach $rows as $row}}
+		{{$order = isset( $row['order'] ) ? $row['order'] : NULL;}}
+		{{$purchase = isset( $row['purchase'] ) ? $row['purchase'] : NULL;}}
+		{{$item = $order ? $order->item : $purchase->item;}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			{{if isset( $headers['item'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size7 ipsType_large">
+					<strong style="color: {$item->color};">{$item->name}</strong>
+				</div>
+			{{endif}}
+			{{if isset( $headers['type'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size7">
+					{{if $order}}
+						{lang="donate_payment_option_{$order->payment_type}"}
+					{{endif}}
+				</div>
+			{{endif}}
+			{{if isset( $headers['cost'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size5">
+					{{if $order}}
+						{$order->cost->currencySymbol}{$order->cost->format}
+						{{if $item->price_detail || $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+							/
+							{{if $item->price_detail}}
+								{$item->price_detail}
+							{{elseif $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+								{expression="\IPS\donate\Application::secondsFormat( $item->active_length, TRUE )['word']" raw="true"}
+							{{endif}}
+						{{endif}}
+					{{endif}}
+				</div>
+			{{endif}}
+			{{if isset( $headers['order'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size6 ipsType_small">
+					{{if $order}}
+						{$order->token}
+					{{endif}}
+				</div>
+			{{endif}}
+			{{if isset( $headers['expires'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size6">
+					{{$tooltip = '';}}
+					{{if $order && $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION && $order->status === \IPS\donate\Order::STATUS_COMPLETED}}
+						{{$tooltip = \IPS\Member::loggedIn()->language()->addToStack( $langPrefix . 'renews');}}
+					{{else}}
+						{{$tooltip = \IPS\Member::loggedIn()->language()->addToStack( $langPrefix . 'expires');}}
+					{{endif}}
+					{{$tooltip .= ' ' . $purchase->deactivate_date->localeDate();}}
+					<span title="{$tooltip}" data-ipsTooltip>{$purchase->deactivate_date->relative()}</span>
+				</div>
+			{{elseif isset( $headers['date'] )}}
+				<div class="ipsDataItem_generic ipsDataItem_size6">
+					{{$date = $order ? $order->date : $purchase->date;}}
+					{datetime="$date"}
+				</div>
+			{{endif}}
+			{{if isset( $headers['giftee'] ) && $order && $order->giftee}}
+				<div class="ipsDataItem_generic">
+					<i class="fa fa-gift fa-lg"></i>&nbsp;
+					{{if $order->giftee->member_id !== \IPS\Member::loggedIn()->member_id}}
+						<span class="ipsType_small ipsType_light">
+							{lang="donate_mydonations_gift_for"}
+						</span>&nbsp;
+						{$order->giftee->link()|raw}
+					{{else}}
+						<span class="ipsType_small ipsType_light">
+							{lang="donate_mydonations_gift_from"}
+						</span>&nbsp;
+						{$order->member->link()|raw}
+					{{endif}}
+				</div>
+			{{endif}}
+		</li>
+	{{endforeach}}
+{{endif}}

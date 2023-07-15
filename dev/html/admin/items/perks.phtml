@@ -1,0 +1,4 @@
+<ips:template parameters="$perks" />
+{{foreach $perks as $perk}}
+	<span class="ipsBadge ipsBadge_neutral">{lang="donate_items_perk_$perk->id"}</span>
+{{endforeach}}

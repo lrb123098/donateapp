@@ -1,0 +1,42 @@
+<ips:template parameters="$id, $action, $elements, $hiddenValues, $actionButtons, $uploadField, $class, $attributes, $sidebar, $form, $errorTabs" />
+<form id="{$id}" accept-charset="utf-8" action="{$action}" method="post" data-ipsForm data-controller="donate.front.checkout.form">
+	<input type="hidden" name="{$id}_submitted" value="1">
+	{{foreach $hiddenValues as $k => $v}}
+		{{if \is_array($v)}}
+			{{foreach $v as $_k => $_v}}
+				<input type="hidden" name="{$k}[{$_k}]" value="{$_v}">
+			{{endforeach}}
+		{{else}}
+			<input type="hidden" name="{$k}" value="{$v}">
+		{{endif}}
+	{{endforeach}}
+	{{if $sidebar}}
+		<div class="cCheckout_columns ipsColumns ipsColumns_collapseTablet ipsColumns_collapsePhone">
+			<div class="cCheckout_contentColumn ipsColumn ipsColumn_fluid">
+	{{endif}}
+	<div class="ipsBox ipsSpacer_bottom">
+		<ul class="cCheckout_form ipsPad ipsForm {$class} ipsAreaBackground">
+			{{foreach $elements[''] as $k => $input}}
+				<li class="cCheckout_formField ipsAreaBackground_reset" data-checkout-formField="{$k}">
+					<ul>
+						{$input|raw}
+					</ul>
+				</li>
+			{{endforeach}}
+		</ul>
+	</div>
+	<div class="cCheckout_buttons ipsAreaBackground_light ipsClearfix ipsPad">
+		{expression="implode( '', $actionButtons )" raw="true"}
+	</div>
+	{{if $sidebar}}
+		</div>
+	{{endif}}
+	{{if $sidebar}}
+			<div class="cCheckout_sidebarColumn ipsColumn ipsColumn_veryWide">
+				<div class="ipsAreaBackground ipsPad">
+					{expression="implode( '', $sidebar )" raw="true"}
+				</div>
+			</div>
+		</div>
+	{{endif}}
+</form>

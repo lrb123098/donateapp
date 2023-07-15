@@ -1,0 +1,12 @@
+{
+    "core": {
+        "FrontNavigation": {
+            "Checkout": "IPS\\donate\\extensions\\core\\FrontNavigation\\Checkout",
+            "DonationList": "IPS\\donate\\extensions\\core\\FrontNavigation\\DonationList",
+            "MyDonations": "IPS\\donate\\extensions\\core\\FrontNavigation\\MyDonations"
+        },
+        "Notifications": {
+            "Donate": "IPS\\donate\\extensions\\core\\Notifications\\Donate"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<ips:template parameters="$profileData, $isInput=TRUE, $isChecked=FALSE" />
+{{if $isInput}}
+	<label class="ipsCursor_pointer">
+{{endif}}
+	<div class="cSteamAccount_card ipsPos_center ipsType_left ipsAreaBackground_dark ipsAreaBackground_rounded">
+		{{if $isInput}}
+			<input type="radio" name="donate_checkout_steam_account" value="{$profileData['steamid64']}" {{if $isChecked}}checked{{endif}}>
+		{{endif}}
+		<span class='ipsSocial_icon'>
+			<i class='fa fa-steam'></i>
+		</span>
+		<div class="cSteamAccount_cardPanel">
+			<img src="{$profileData['avatarfull']}" alt="" class="ipsUserPhoto ipsUserPhoto_mini">
+			<div class="cSteamAccount_cardInfo">
+				<div class="cSteamAccount_cardInfoName">{$profileData['personaname']}</div>
+				<div class="cSteamAccount_cardInfoId">{$profileData['steamid2']}</div>
+			</div>
+		</div>
+	</div>
+{{if $isInput}}
+	</label>
+{{endif}}

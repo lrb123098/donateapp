@@ -1,0 +1,46 @@
+<ips:template parameters="$item, $option, $cost, $details=NULL" />
+{template="itemCard" group="checkout" app="donate" params="$item, 'vertical', FALSE, FALSE, FALSE"}
+
+<div class="cReviewCard ipsBox ipsAreaBackground_reset">
+	<div class="cReviewCard_info ipsType_center ipsAreaBackground_light ipsPad ipsPad_double">
+		<h1 class="cReviewCard_cost ipsType_reset">
+			{$cost->currencySymbol}{$cost->format}
+		</h1>
+		{{if $item->price_detail || $option->paymentType === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+			<h3 class="cReviewCard_costDetail ipsType_reset">
+				/
+				{{if $item->price_detail}}
+					{$item->price_detail}
+				{{elseif $option->paymentType === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+					{expression="\IPS\donate\Application::secondsFormat( $item->active_length, TRUE )['word']" raw="true"}
+				{{endif}}
+			</h3>
+		{{endif}}
+		<h2 class="cReviewCard_paymentType ipsPos_center ipsSpacer_top ipsSpacer_half">
+			{lang="donate_payment_option_$option->paymentType"}
+		</h2>
+	</div>
+	{{if $details && \is_array( $details ) && \count( $details ) > 0}}
+		<div class="cReviewCard_details ipsType_normal ipsPad ipsPad_double ipsType_center">
+			{{foreach $details as $detail}}
+				<div>
+					{{if isset( $detail['icon'] )}}
+						<i class="fa fa-{$detail['icon']} fa-lg"></i>
+					{{endif}}
+					{{if isset( $detail['title'] )}}
+						<h4 class="ipsType_reset">
+							{lang="$detail['title']"}
+						</h4>
+					{{elseif isset( $detail['titleHtml'] )}}
+						<div>
+							{$detail['titleHtml']|raw}
+						</div>
+					{{endif}}
+					{{if isset( $detail['content'] )}}
+						<span>{$detail['content']|raw}</span>
+					{{endif}}
+				</div>
+			{{endforeach}}
+		</div>
+	{{endif}}
+</div>

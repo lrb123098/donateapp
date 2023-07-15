@@ -1,0 +1,463 @@
+
+.cCheckout_wizardSteps {
+	width: 100%;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cCheckout_wizardSteps .ipsStepBar {
+	width: fit-content;
+	margin: 0 auto;
+	background: unset;
+}
+
+.cCheckout_wizardSteps .ipsStep {
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+.cCheckout_formField {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.cCheckout_formField:not(:first-child) {
+	border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.cCheckout_formField:first-child {
+	padding-top: 20px;
+}
+
+.cCheckout_formField:last-child {
+	padding-bottom: 20px;
+}
+
+.cCheckout_formField[data-checkout-formfield="donate_checkout_items"] {
+	padding: 0;
+}
+
+.cCheckout_formField[data-checkout-formfield="donate_checkout_items"] > ul, .cCheckout_formField[data-checkout-formfield="donate_checkout_items"] .ipsFieldRow_content {
+	width: 100%;
+}
+
+.cCheckout_formField > ul {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+
+.cCheckout_formField .ipsFieldRow_label {
+	text-align: center !important;
+	font-size: 22px !important;
+	font-weight: 500 !important;
+	margin-bottom: 20px  !important;
+	padding-top: 0 !important;
+}
+
+.cCheckout_formField .ipsFieldRow_label[for="donate_checkout_items"] {
+	display: none;
+}
+
+.cCheckout_formField .ipsFieldRow_content {
+	width: fit-content;
+}
+
+.cCheckout_formField .ipsFieldRow_content > * {
+	margin: 0 auto;
+}
+
+.cCheckout_numberField, .cCheckout_numberField input {
+	vertical-align: middle;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.cItemCards {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.cItemCard {
+	width: 100%;
+}
+
+.cItemCards .cItemCard_vertical {
+	width: 275px;
+	margin-bottom: 0;
+}
+
+.cItemCards .cItemCard_vertical:last-of-type {
+	margin-right: 0;
+}
+
+.cItemCard:last-of-type {
+	margin-bottom: 0;
+}
+
+.cItemCard > label {
+	display: block;
+	height: 100%;
+}
+
+.cItemCard_info {
+	position: relative;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_info {
+	height: 200px;
+}
+
+.cItemCard[data-itemCard-hasPerks].cItemCard_vertical .cItemCard_info {
+	padding-bottom: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.cItemCard_name {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_name {
+	font-size: 22px;
+}
+
+.cItemCard_priceBox {
+	height: 25px;
+}
+
+.cItemCard_desc {
+	overflow: none;
+	width: 80%;
+	font-size: 13px;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_desc {
+	width: unset;
+}
+
+.cItemCard_perks {
+	width: 100%;
+}
+
+.cItemCard_horizontal .cItemCard_perks {
+	display: flex;
+}
+
+.cItemCard_vertical .cItemCard_perks {
+	width: fit-content;
+	padding-top: 15px;
+}
+
+.cItemCard_perkGroup {
+	display: block;
+	white-space: initial;
+	margin-top: 5px;
+}
+
+.cItemCard_horizontal .cItemCard_perkGroup {
+	border-left: 1px solid rgba(0, 0, 0, 0.125);
+	padding-left: 20px;
+	flex: 1;
+}
+
+.cItemCard_horizontal .cItemCard_perkGroup:first-of-type {
+	border-left: none;
+	padding-left: 0;
+}
+
+.cItemCard_vertical .cItemCard_perkGroup {
+	margin-top: 0;
+}
+
+.cItemCard_vertical .cItemCard_perkGroup:not(:first-child) {
+	border-top: 2px solid rgba(0, 0, 0, 0.05);
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+.cItemCard_perkTitle {
+	font-size: 14px;
+	font-weight: 600;
+	margin-left: 5px;
+}
+
+.cItemCard_vertical .cItemCard_perkTitle {
+	text-align: center;
+}
+
+.cItemCard_perkCol {
+	margin: 0;
+	padding: 0;
+}
+
+.cItemCard_perkCol > li {
+	font-size: 12px;
+	margin: 5px 15px 0 15px;
+	list-style: none;
+}
+
+.cItemCard_perkCol > li:before {
+	content: '+';
+	position: relative;
+	margin-left: -15px;
+	margin-right: 5px;
+	font-weight: 600;
+}
+
+.cItemCard_price, .cReviewCard_cost {
+	display: inline-block;
+	font-size: 28px;
+	font-weight: 500;
+}
+
+.cItemCard_priceDetail, .cReviewCard_costDetail {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.cItemCards .cItemCard_vertical .cItemCard_input {
+	position: absolute;
+	left: 48%;
+	bottom: 15px;
+}
+
+.cPaymentOption {
+	width: 212px;
+}
+
+.cPaymentOption:first-of-type {
+	margin-right: 5px;
+}
+
+.cPaymentOption:last-of-type {
+	margin-left: 5px;
+}
+
+.cPaymentOption span {
+	vertical-align: middle;
+}
+
+.cPaymentOption .ipsCustomInput {
+	margin-right: 10px;
+}
+
+.cGift, .cGift_member {
+	width: 260px;
+}
+
+.cGift_toggle {
+	width: fit-content;
+}
+
+.cSteamAccount_login, .cSteamAccount_card, .cSteamAccount_text {
+	width: 260px;
+}
+
+.cSteamAccount_login {
+	overflow: hidden;
+}
+
+.cSteamAccount_card {
+	position: relative;
+	height: 62px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 2px solid rgba(0,0,0,0.3);
+	background: #171a21;
+}
+
+.cSteamAccount_card input {
+	display: none;
+}
+
+.cSteamAccount_card .ipsSocial_icon, .cSteamAccount_cardPanel, .cSteamAccount_cardInfo {
+	display: inline-block;
+}
+
+.cSteamAccount_card .ipsSocial_icon {
+	text-align: center;
+	height: 100%;
+	vertical-align: top;
+	background: rgba(0,0,0,0.3);
+}
+
+.cSteamAccount_card .ipsSocial_icon i {
+	position: relative;
+	top: 22px;
+	opacity: 0.05;
+}
+
+.cSteamAccount_card .ipsUserPhoto {
+	float: unset;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.cSteamAccount_cardPanel {
+	height: 100%;
+	width: 86%;
+	padding: 6px 0 6px 0;
+	opacity: 0.4;
+}
+
+.cSteamAccount_card input:hover ~ .cSteamAccount_cardPanel, .cSteamAccount_card input:hover ~ .ipsSocial_icon i {
+	opacity: 0.8;
+}
+
+.cSteamAccount_card input:checked ~ .cSteamAccount_cardPanel, .cSteamAccount_card input:checked ~ .ipsSocial_icon i {
+	opacity: 1;
+}
+
+.cSteamAccount_card:hover {
+	filter: brightness(1.1);
+}
+
+.cSteamAccount_card:active {
+	filter: brightness(1.2);
+}
+
+.cSteamAccount_cardInfo {
+	vertical-align: middle;
+}
+
+.cSteamAccount_cardInfoName {
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.cSteamAccount_cardInfoId {
+	font-size: 12px;
+	opacity: 0.9;
+}
+
+.cSteamAccount_or {
+	position: relative;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.cSteamAccount_or > h4 {
+	position: relative;
+	width: 40px;
+	margin: 0 auto;
+	z-index: 2;
+}
+
+.cSteamAccount_or:after {
+	border-top: 1px solid rgba(0, 0, 0, 0.15);
+	content: '';
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	z-index: 1;
+}
+
+.cSteamAccount_text {
+	position: relative;
+	height: 38px;
+}
+
+.cSteamAccount_text .ipsSocial_icon {
+	display: inline-block;
+	text-align: center;
+	position: absolute;
+	height: 100%;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.cSteamAccount_text .ipsSocial_icon i {
+	position: relative;
+	top: 10px;
+}
+
+.cSteamAccount_text input[type="text"] {
+	font-size: 15px;
+	font-weight: 500;
+	padding-left: 40px !important;
+	height: 100%;
+}
+
+.cReviewCard_info {
+	padding-bottom: 15px;
+}
+
+.cReviewCard_name {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.cReviewCard_paymentType {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.cReviewCard_details {
+	padding-top: 15px;
+}
+
+.cReviewCard_details > div:not(:first-child) {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.cGatewayProviders > label {
+	display: block;
+}
+
+.cGatewayProviders > label:not(:first-child) {
+	margin-top: 15px;
+}
+
+.cGatewayProvider {
+	width: 262px;
+	position: relative;
+	display: block !important;
+}
+
+.cGatewayProvider:hover {
+	filter: brightness(1.1);
+}
+
+.cGatewayProvider:active {
+	filter: brightness(1.2);
+}
+
+.cGatewayProvider span {
+	vertical-align: middle;
+}
+
+.cGatewayProvider > span > img {
+	height: 25px;
+}
+
+.cGatewayProvider .ipsCustomInput {
+	position: absolute;
+	top: 15px;
+	left: 35px;
+}
+
+.cCheckout_completeOrder {
+	width: 50%;
+}
+
+.cCheckout_completeOrder .ipsColumn:first-child {
+	border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.cCheckout_completeMessageDesc {
+	width: fit-content;
+}
+
+.cCheckout_completeMessageDescDetail {
+	text-align: left;
+}

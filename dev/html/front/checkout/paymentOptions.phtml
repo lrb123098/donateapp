@@ -1,0 +1,18 @@
+<ips:template parameters="$item, $default=NULL" />
+{{$count = \count( $item->payment_options );}}
+{{foreach $item->payment_options as $option}}
+	{{$isChecked = $count === 1 || (string) $option === $default;}}
+	<label for="elPaymentOption_{$option->paymentType}">
+		<div class="cPaymentOption ipsButton ipsButton_normal ipsButton_large">
+			<span class='ipsCustomInput'>
+				{{$isFixed = ( $option->priceType === \IPS\donate\Order::PRICE_TYPE_FIXED );}}
+				{{$isVariable = ( $option->priceType === \IPS\donate\Order::PRICE_TYPE_VARIABLE );}}
+				<input type="radio" id="elPaymentOption_{$option->paymentType}" name="donate_checkout_payment_options" value="{$option}" {{if $isFixed}}data-paymentOption-fixed{{endif}} {{if $isVariable}}data-paymentOption-variable{{endif}} {{if $isChecked}}checked{{endif}}>
+				<span></span>
+			</span>
+			<span>
+				{lang="donate_payment_option_$option->paymentType"}
+			</span>
+		</div>
+	</label>
+{{endforeach}}

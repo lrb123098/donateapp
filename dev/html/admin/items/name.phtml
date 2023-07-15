@@ -1,0 +1,6 @@
+<ips:template parameters="$name, $color=NULL, $bold=TRUE" />
+<span {{if $color}}style="color: {$color};"{{endif}}>
+	{{if $bold}}<strong>{{endif}}
+	{$name}
+	{{if $bold}}</strong>{{endif}}
+</span>

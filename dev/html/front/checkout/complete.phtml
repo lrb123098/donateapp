@@ -1,0 +1,85 @@
+<ips:template parameters="$order, $detail=NULL" />
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="donate_checkout"}</h1>
+</div>
+
+
+<div class="cCheckout_complete">
+	<div class="ipsBox ipsBox_transparent ipsAreaBackground_light">
+		<div class="ipsAreaBackground_light ipsPad">
+			<div class="ipsAreaBackground_reset ipsPad ipsType_center">
+				<h1 class="cCheckout_completeMessage ipsType_veryLarge">
+					{{if $order->status === \IPS\donate\Order::STATUS_COMPLETED}}
+						<i class="fa fa-check"></i> {lang="donate_checkout_complete_success"}
+					{{elseif $order->status === \IPS\donate\Order::STATUS_PENDING}}
+						<i class="fa fa-credit-card"></i> {lang="donate_checkout_complete_pending"}
+					{{endif}}
+				</h1>
+				<div class="cCheckout_completeOrder ipsType_center ipsPos_center ipsAreaBackground ipsPad ipsSpacer_bottom">
+					<div class="ipsAreaBackground_light ipsBox ipsBox_transparent ipsPad ipsPad_double">
+						<div class="ipsColumns ipsColumns_collapseTablet ipsColumns_collapsePhone">
+							<div class="ipsColumn ipsColumn_fluid">
+								<h2 class="ipsType_reset">
+									{lang="donate_checkout_complete_order_number"}
+								</h2>
+								<div class="ipsType_normal ipsSpacer_top ipsSpacer_half">
+									{$order->token}
+								</div>
+								{{if $detail}}
+									<div class="ipsSpacer_top ipsSpacer_half">
+										{{if isset( $detail['icon'] )}}
+											<i class="fa fa-{$detail['icon']} fa-lg"></i>
+										{{endif}}
+										{{if isset( $detail['title'] )}}
+											<h4 class="ipsType_reset">
+												{lang="$detail['title']"}
+											</h4>
+										{{elseif isset( $detail['titleHtml'] )}}
+											<div>
+												{$detail['titleHtml']|raw}
+											</div>
+										{{endif}}
+										{{if isset( $detail['content'] )}}
+											<span>{$detail['content']|raw}</span>
+										{{endif}}
+									</div>
+								{{endif}}
+							</div>
+							<div class="ipsColumn ipsColumn_fluid">
+								<h2 class="cReviewCard_name ipsType_reset ipsSpacer_bottom" {{if $order->item->color}}style="color:{$order->item->color};"{{endif}}>
+									{$order->item->name}
+								</h2>
+								<h2 class="cReviewCard_cost ipsType_reset">
+									{$order->cost->currencySymbol}{$order->cost->format}
+								</h2>
+								{{if $order->item->price_detail || $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+									<h3 class="cReviewCard_costDetail ipsType_reset">
+										/
+										{{if $order->item->price_detail}}
+											{$order->item->price_detail}
+										{{elseif $order->payment_type === \IPS\donate\Order::PAYMENT_TYPE_SUBSCRIPTION}}
+											{expression="\IPS\donate\Application::secondsFormat( $order->item->active_length, TRUE )['word']" raw="true"}
+										{{endif}}
+									</h3>
+								{{endif}}
+								<h2 class="cReviewCard_paymentType ipsPos_center ipsSpacer_top ipsSpacer_half">
+									{lang="donate_payment_option_$order->payment_type"}
+								</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="cCheckout_completeMessageDesc ipsPos_center ipsType_normal ipsType_light ipsSpacer_bottom ipsSpacer_double">
+					{{if $order->status === \IPS\donate\Order::STATUS_COMPLETED}}
+						{lang="donate_checkout_complete_success_desc"}
+					{{elseif $order->status === \IPS\donate\Order::STATUS_PENDING}}
+						{lang="donate_checkout_complete_pending_desc"}
+						<div class="cCheckout_completeMessageDescDetail ipsType_neutral ipsType_small ipsType_left ipsType_unbold">
+							{lang="donate_checkout_complete_pending_desc_detail"}
+						</div>
+					{{endif}}
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>

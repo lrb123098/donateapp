@@ -1,0 +1,46 @@
+<ips:template parameters="$table, $headers, $rows" />
+{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		<div class="ipsDataItem_generic ipsDataItem_size6">
+			{lang="{$table->langPrefix}amount"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}item"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}type"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}order"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size8">
+			{lang="{$table->langPrefix}date"}
+		</div>
+	</li>
+	{{foreach $rows as $row}}
+		{{$order = isset( $row['order'] ) ? $row['order'] : NULL;}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			<div class="ipsDataItem_generic ipsDataItem_size6 ipsType_large">
+				{$row['amount']->currencySymbol}{$row['amount']->format}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8">
+				{{if $order}}
+					<span style="color: {$order->item->color};">{$order->item->name}</span>
+				{{endif}}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8">
+				{{if $order}}
+					{lang="donate_payment_option_{$order->payment_type}"}
+				{{endif}}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8 ipsType_small">
+				{{if $order}}
+					{$order->token}
+				{{endif}}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size8">
+				{datetime="$row['date']"}
+			</div>
+		</li>
+	{{endforeach}}
+{{endif}}

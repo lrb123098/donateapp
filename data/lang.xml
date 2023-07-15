@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+ <app key="donate" version="10005">
+  <word key="__app_donate" js="0">Donate</word>
+  <word key="module__donate_donate" js="0">Donate</word>
+  <word key="menutab__donate" js="0">Donate</word>
+  <word key="menutab__donate_icon" js="0">money</word>
+  <word key="menu__donate_settings" js="0">Settings</word>
+  <word key="menu__donate_settings_settings" js="0">Settings</word>
+  <word key="menu__donate_donations" js="0">Donations</word>
+  <word key="menu__donate_donations_items" js="0">Items</word>
+  <word key="menu__donate_donations_transactions" js="0">Transactions</word>
+  <word key="menu__donate_donations_subscriptions" js="0">Subscriptions</word>
+  <word key="r__donate_settings" js="0">Settings</word>
+  <word key="r__donate_settings_manage" js="0">Can access settings?</word>
+  <word key="r__donate_settings_general_manage" js="0">Can manage general settings?</word>
+  <word key="r__donate_settings_paypal_manage" js="0">Can manage PayPal settings?</word>
+  <word key="r__donate_settings_sourcebans_manage" js="0">Can manage Sourcebans settings?</word>
+  <word key="r__donate_settings_csgostore_manage" js="0">Can manage CS:GO store settings?</word>
+  <word key="r__donate_donations_items" js="0">Items</word>
+  <word key="r__donate_donations_items_manage" js="0">Can view items?</word>
+  <word key="r__donate_donations_items_add" js="0">Can add items?</word>
+  <word key="r__donate_donations_items_edit" js="0">Can edit items?</word>
+  <word key="r__donate_donations_transactions" js="0">Transactions</word>
+  <word key="r__donate_donations_transactions_manage" js="0">Can view transactions?</word>
+  <word key="r__donate_donations_transactions_add" js="0">Can add transactions?</word>
+  <word key="r__donate_donations_transactions_edit" js="0">Can edit transactions?</word>
+  <word key="r__donate_donations_subscriptions" js="0">Subscriptions</word>
+  <word key="r__donate_donations_subscriptions_manage" js="0">Can view subscriptions?</word>
+  <word key="r__donate_donations_subscriptions_add" js="0">Can add subscriptions?</word>
+  <word key="r__donate_donations_subscriptions_edit" js="0">Can edit subscriptions?</word>
+  <word key="donate_settings_general" js="0">General</word>
+  <word key="donate_settings_general_settings" js="0">General Settings</word>
+  <word key="acplogs__donate_settings_general" js="0">Edited Donate General Settings</word>
+  <word key="donate_log_enabled" js="0">Enable Logging?</word>
+  <word key="donate_log_enabled_desc" js="0">Events such as orders being created, payments being made, or subscriptions being canceled will be logged for future reference.</word>
+  <word key="donate_donation_goal" js="0">Donation Goal</word>
+  <word key="donate_provider_smallprint" js="0"><![CDATA[Checkout Terms & Conditions]]></word>
+  <word key="donate_provider_smallprint_desc" js="0">Any terms and conditions you want to show on the checkout's pay step, or that payment providers (e.g. PayPal) may require.</word>
+  <word key="donate_settings_paypal" js="0">PayPal</word>
+  <word key="donate_settings_paypal_settings" js="0">PayPal Settings</word>
+  <word key="acplogs__donate_settings_paypal" js="0">Edited Donate PayPal Settings</word>
+  <word key="donate_paypal_email" js="0">Account Email</word>
+  <word key="donate_settings_paypal_api" js="0">API Credentials</word>
+  <word key="donate_paypal_api_sandbox_enabled" js="0">Use Sandbox Environment?</word>
+  <word key="donate_paypal_api_sandbox_enabled_desc" js="0">In order to test the application the PayPal API sandbox environment will be used instead of production. Sandbox accounts must be used while this is enabled.</word>
+  <word key="donate_paypal_api_sandbox_clientid" js="0">Sandbox Client Id</word>
+  <word key="donate_paypal_api_sandbox_secret" js="0">Sandbox Secret</word>
+  <word key="donate_paypal_api_live_clientid" js="0">Production Client Id</word>
+  <word key="donate_paypal_api_live_secret" js="0">Production Secret</word>
+  <word key="donate_settings_paypal_eventlistener" js="0">Event Listener</word>
+  <word key="donate_paypal_ipn_enabled" js="0">IPN</word>
+  <word key="donate_paypal_webhook_enabled" js="0">Webhook</word>
+  <word key="donate_paypal_webhook_id" js="0">Webhook Id</word>
+  <word key="donate_settings_sourcebans" js="0">Sourcebans</word>
+  <word key="donate_settings_sourcebans_settings" js="0">Sourcebans Settings</word>
+  <word key="acplogs__donate_settings_sourcebans" js="0">Edited Donate Sourcebans Settings</word>
+  <word key="donate_sourcebans_db_host" js="0">Database Host</word>
+  <word key="donate_sourcebans_db_user" js="0">Database Username</word>
+  <word key="donate_sourcebans_db_pass" js="0">Database Password</word>
+  <word key="donate_sourcebans_db_database" js="0">Database Name</word>
+  <word key="donate_sourcebans_db_port" js="0">Database Port</word>
+  <word key="donate_sourcebans_groups" js="0">Assigned Groups</word>
+  <word key="donate_sourcebans_groups_desc" js="0"><![CDATA[NOTE: You must use the JSON format.<br><br>For each group object the key is the IPS group id. Within the objects, "groups" contains the Sourcebans group names that should be set when the group perk is activated. The key is the user's starting SB group, the value is what the group should be set to. "unset_groups" is for special cases; it contains the assigned Sourcebans groups that should be set down to when the group perk is deactivated.<br><br><i>This is just a temporary way of editing the groups, a more user friendly way will be <span title='...Maybe'>Coming Soon&trade;</span></i>]]></word>
+  <word key="donate_settings_csgostore" js="0">CS:GO Store</word>
+  <word key="donate_settings_csgostore_settings" js="0">CS:GO Store Settings</word>
+  <word key="acplogs__donate_settings_csgostore" js="0">Edited Donate CS:GO Store Settings</word>
+  <word key="donate_csgostore_db_host" js="0">Database Host</word>
+  <word key="donate_csgostore_db_user" js="0">Database Username</word>
+  <word key="donate_csgostore_db_pass" js="0">Database Password</word>
+  <word key="donate_csgostore_db_database" js="0">Database Name</word>
+  <word key="donate_csgostore_db_port" js="0">Database Port</word>
+  <word key="donate_items_settings" js="0">Item Settings</word>
+  <word key="acplogs__donate_items" js="0">Saved Donate Item</word>
+  <word key="donate_items_add" js="0">Create New Item</word>
+  <word key="donate_items_name" js="0">Item Name</word>
+  <word key="donate_items_price" js="0">Item Price</word>
+  <word key="donate_items_price_detail" js="0">Custom Price Suffix</word>
+  <word key="donate_items_price_detail_desc" js="0">Use this if you want to display a custom suffix after the price.</word>
+  <word key="donate_items_color_use" js="0">Use an Item Color?</word>
+  <word key="donate_items_color" js="0">Item Color</word>
+  <word key="donate_items_desc" js="0">Item Description</word>
+  <word key="donate_items_payment_options" js="0">Payment Options</word>
+  <word key="donate_items_payment_options_paymenttype" js="0">Payment Type</word>
+  <word key="donate_items_payment_options_pricetype" js="0">Price Type</word>
+  <word key="donate_items_active_length_use" js="0">Use Active Length?</word>
+  <word key="donate_items_active_length" js="0">Active Length</word>
+  <word key="donate_items_active_length_desc" js="0">How long this item will be active for before it expires or renews.</word>
+  <word key="donate_items_active_length_time" js="0">Time format</word>
+  <word key="donate_items_enabled" js="0">Enabled</word>
+  <word key="donate_items_perks_settings" js="0">Perk Settings</word>
+  <word key="donate_items_perks" js="0">Perks</word>
+  <word key="donate_items_perksdesc" js="0">Perks Description</word>
+  <word key="donate_items_perk_member_group" js="0">Member Group</word>
+  <word key="donate_items_perk_sb_group" js="0">Sourcebans Group</word>
+  <word key="donate_items_perk_store_credits" js="0">Store Credits</word>
+  <word key="donate_items_provider_settings" js="0">Payment Provider Data</word>
+  <word key="donate_items_paypal_planid" js="0">PayPal Plan Id</word>
+  <word key="donate_transactions_type" js="0">Type</word>
+  <word key="donate_transactions_type_payment" js="0">Payment</word>
+  <word key="donate_transactions_type_payment_refund" js="0">Refund</word>
+  <word key="donate_transactions_type_payment_reversal" js="0">Reversal</word>
+  <word key="donate_transactions_member" js="0">Member</word>
+  <word key="donate_transactions_amount" js="0">Amount</word>
+  <word key="donate_transactions_order" js="0">Order #</word>
+  <word key="donate_transactions_token" js="0">Transaction #</word>
+  <word key="donate_transactions_status" js="0">Status</word>
+  <word key="donate_transactions_status_paid" js="0">Paid</word>
+  <word key="donate_transactions_status_refunded" js="0">Refunded</word>
+  <word key="donate_transactions_status_reversed" js="0">Reversed</word>
+  <word key="donate_transactions_date" js="0">Date</word>
+  <word key="acplogs__donate_subscriptions" js="0">Saved Donate Subscription</word>
+  <word key="donate_subscriptions_add" js="0">Add Subscription</word>
+  <word key="donate_subscriptions_edit" js="0">Edit Subscription</word>
+  <word key="donate_subscriptions_member" js="0">Member</word>
+  <word key="donate_subscriptions_item" js="0">Item</word>
+  <word key="donate_subscriptions_active" js="0">Active</word>
+  <word key="donate_subscriptions_inactive" js="0">Inactive</word>
+  <word key="donate_subscriptions_giftee" js="0"></word>
+  <word key="donate_subscriptions_gift" js="0">Gift</word>
+  <word key="donate_subscriptions_deactivate_date" js="0">Expires/Renews</word>
+  <word key="donate_subscriptions_date" js="0">Start Date</word>
+  <word key="donate_subscriptions_date_expire" js="0">Expire Date</word>
+  <word key="donate_subscriptions_extra_data" js="0">Extra Data</word>
+  <word key="donate_back" js="0">Back</word>
+  <word key="donate_pay" js="0"><![CDATA[Confirm & Pay]]></word>
+  <word key="donate_payment_option_subscription" js="0">Subscription</word>
+  <word key="donate_payment_option_onetime" js="0">Single Donation</word>
+  <word key="donate_payment_option_subscriptionfixed" js="0">Subscription, Fixed</word>
+  <word key="donate_payment_option_subscriptionvariable" js="0">Subscription, Variable</word>
+  <word key="donate_payment_option_onetimefixed" js="0">Single Donation, Fixed</word>
+  <word key="donate_payment_option_onetimevariable" js="0">Single Donation, Variable</word>
+  <word key="donate_payment_option_fixed" js="0">Fixed</word>
+  <word key="donate_payment_option_variable" js="0">Variable</word>
+  <word key="donate_donationlist" js="0">Donation List</word>
+  <word key="donate_donationlist_latest" js="0">Latest Donations</word>
+  <word key="donate_donationlist_top" js="0">Top Donors</word>
+  <word key="donate_donationlist_total" js="0">Total</word>
+  <word key="donate_donationlist_date" js="0">Date</word>
+  <word key="donate_donationlist_member" js="0">Member</word>
+  <word key="donate_donationlist_amount" js="0">Amount</word>
+  <word key="donate_donationlist_sort_date" js="0">Date</word>
+  <word key="donate_donationlist_sort_amount" js="0">Amount</word>
+  <word key="donate_mydonations" js="0">My Donations</word>
+  <word key="donate_mydonations_menu" js="0">Menu</word>
+  <word key="donate_mydonations_overview" js="0">Overview</word>
+  <word key="donate_mydonations_overview_active" js="0">Active</word>
+  <word key="donate_mydonations_overview_inactive" js="0">Previous</word>
+  <word key="donate_mydonations_overview_pending" js="0">Pending</word>
+  <word key="donate_mydonations_payments" js="0">Payments</word>
+  <word key="donate_mydonations_cost" js="0">Cost</word>
+  <word key="donate_mydonations_type" js="0">Type</word>
+  <word key="donate_mydonations_expiresrenews" js="0">Expires/Renews</word>
+  <word key="donate_mydonations_expires" js="0">Expires on</word>
+  <word key="donate_mydonations_renews" js="0">Renews on</word>
+  <word key="donate_mydonations_date" js="0">Date</word>
+  <word key="donate_mydonations_amount" js="0">Amount</word>
+  <word key="donate_mydonations_item" js="0">Item</word>
+  <word key="donate_mydonations_order" js="0">Order #</word>
+  <word key="donate_mydonations_sort_amount" js="0">Amount</word>
+  <word key="donate_mydonations_sort_date" js="0">Date</word>
+  <word key="donate_mydonations_gift_for" js="0">Gift for</word>
+  <word key="donate_mydonations_gift_from" js="0">Gift from</word>
+  <word key="donate_checkout" js="0">Donation Checkout</word>
+  <word key="donate_checkout_choose" js="0">Choose</word>
+  <word key="donate_checkout_choose_title" js="0">Choose an Item</word>
+  <word key="donate_checkout_options" js="0">Options</word>
+  <word key="donate_checkout_options_title" js="0">Pick your Options</word>
+  <word key="donate_checkout_pay" js="0">Pay</word>
+  <word key="donate_checkout_pay_title" js="0">Pay the Order</word>
+  <word key="donate_checkout_confirm" js="0">Confirm</word>
+  <word key="donate_checkout_complete" js="0">Complete</word>
+  <word key="donate_checkout_complete_success" js="0">Your order is complete!</word>
+  <word key="donate_checkout_complete_success_desc" js="0">Perks are now available to use</word>
+  <word key="donate_checkout_complete_pending" js="0">Your order is currently pending</word>
+  <word key="donate_checkout_complete_pending_desc" js="0">Perks will become available when payment has been confirmed</word>
+  <word key="donate_checkout_complete_pending_desc_detail" js="0">This may take a few minutes or longer for some payment methods</word>
+  <word key="donate_checkout_complete_order_number" js="0">Order #</word>
+  <word key="donate_checkout_items" js="0">Choose an item</word>
+  <word key="donate_checkout_payment_options" js="0">Pick a Donation Option</word>
+  <word key="donate_checkout_amount" js="0">Amount to Donate</word>
+  <word key="donate_checkout_gift" js="0">Is this a Gift?</word>
+  <word key="donate_checkout_gift_review" js="0">Gift for</word>
+  <word key="donate_checkout_gift_member_desc" js="0">Search for a member</word>
+  <word key="donate_checkout_steam_account" js="0">Choose a Steam account</word>
+  <word key="donate_checkout_steam_account_review" js="0">Steam Account</word>
+  <word key="donate_checkout_steam_account_or" js="0">Or</word>
+  <word key="donate_checkout_steam_account_login_desc" js="0">Use your linked Steam account</word>
+  <word key="donate_checkout_steam_account_text_desc" js="0">Search for a Steam account</word>
+  <word key="donate_checkout_steam_account_text_desc_note" js="0"><![CDATA[<strong>Note:</strong> Forum perks will not apply until account is linked]]></word>
+  <word key="donate_checkout_gateway_providers" js="0">Select a Payment Method</word>
+  <word key="donate_checkout_perks_review_subscription" js="0"><![CDATA[Renews every <strong>%s</strong>]]></word>
+  <word key="donate_checkout_perks_review_onetime" js="0"><![CDATA[Perks will last for <strong>%s</strong>]]></word>
+  <word key="donate_checkout_perks_review_credits" js="0"><![CDATA[<strong>%s</strong> Credits]]></word>
+  <word key="donate_checkout_error_items" js="0">Please select an item</word>
+  <word key="donate_checkout_error_payment_options" js="0">Please select a donation option</word>
+  <word key="donate_checkout_error_gift" js="0">Please enter a valid member</word>
+  <word key="donate_checkout_error_gift_self" js="0">You cannot gift to yourself</word>
+  <word key="donate_checkout_error_steam_account" js="0">Please select a steam account</word>
+  <word key="donate_checkout_error_gateway_providers" js="0">Please select a payment provider</word>
+  <word key="donate_gateway_provider_paypal" js="0">PayPal</word>
+  <word key="second" js="0">second</word>
+  <word key="minute" js="0">minute</word>
+  <word key="hour" js="0">hour</word>
+  <word key="day" js="0">day</word>
+  <word key="week" js="0">week</word>
+  <word key="month" js="0">month</word>
+  <word key="year" js="0">year</word>
+  <word key="block_donationGoal" js="0">Donation Goal</word>
+  <word key="block_donationGoal_desc" js="0">Shows the donation goal for this month</word>
+  <word key="block_donationGoal_month" js="0">%s Donations</word>
+  <word key="block_donationGoal_donate" js="0">Support the Community</word>
+  <word key="notifications__donate_Donate" js="0">Donate</word>
+  <word key="notifications__order_completed" js="0">Order completed</word>
+  <word key="notification__order_completed" js="0">Donation order is complete. %s perks are now available</word>
+  <word key="notifications__gifted" js="0">Gifted</word>
+  <word key="notification__gifted" js="0">%s has gifted you %s</word>
+  <word key="loc_donate_donationlist" js="0">Viewing Donation List</word>
+  <word key="loc_donate_mydonations" js="0">Viewing My Donations</word>
+  <word key="loc_donate_checkout" js="0">Using Donation Checkout</word>
+ </app>
+</language>

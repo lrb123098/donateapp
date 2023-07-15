@@ -1,0 +1,23 @@
+<ips:template parameters="$providers" />
+<div class="cGatewayProviders">
+	{{$isChecked = \count( $providers ) === 1;}}
+	{{foreach $providers as $provider}}
+		{{$button = $provider->getButton();}}
+		<label for="elGatewayProvider_{$provider->id}">
+			<div class="cGatewayProvider ipsButton ipsButton_normal ipsButton_large" title="{lang='donate_gateway_provider_{$provider->id}'}" {{if isset( $button['background'] )}}style="background: {$button['background']};"{{endif}}>
+				<span class='ipsCustomInput'>
+					<input type="radio" id="elGatewayProvider_{$provider->id}" name="donate_checkout_gateway_providers" value="{$provider->id}" {{if $isChecked}}checked{{endif}}>
+					<span></span>
+				</span>
+				<span>
+					{{if isset( $button['image'] )}}
+						{{$src = $button['image'];}}
+						<img src="{resource='gateway/$provider->id/$src' app='donate' location='front'}">
+					{{elseif isset( $button['content'] )}}
+						{$button['content']}
+					{{endif}}
+				</span>
+			</div>
+		</label>
+	{{endforeach}}
+</div>

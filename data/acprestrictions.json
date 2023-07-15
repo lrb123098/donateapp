@@ -1,0 +1,26 @@
+{
+    "settings": {
+        "donate_settings": {
+            "donate_settings_manage": "donate_settings_manage",
+            "donate_settings_general_manage": "donate_settings_general_manage",
+            "donate_settings_paypal_manage": "donate_settings_paypal_manage",
+            "donate_settings_sourcebans_manage": "donate_settings_sourcebans_manage",
+            "donate_settings_csgostore_manage": "donate_settings_csgostore_manage"
+        }
+    },
+    "donations": {
+        "donate_donations_items": {
+            "donate_donations_items_manage": "donate_donations_items_manage",
+            "donate_donations_items_add": "donate_donations_items_add",
+            "donate_donations_items_edit": "donate_donations_items_edit"
+        },
+        "donate_donations_transactions": {
+            "donate_donations_transactions_manage": "donate_donations_transactions_manage"
+        },
+        "donate_donations_subscriptions": {
+            "donate_donations_subscriptions_manage": "donate_donations_subscriptions_manage",
+            "donate_donations_transactions_add": "donate_donations_transactions_add",
+            "donate_donations_transactions_edit": "donate_donations_transactions_edit"
+        }
+    }
+}

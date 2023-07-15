@@ -1,0 +1,57 @@
+{
+	"topLevel": "",
+	"pages": {
+		"donate_donationlist": {
+			"friendly": "donation-list",
+			"real": "app=donate&module=donate&controller=donationlist"
+		},
+		"donate_donationlist_latest": {
+			"friendly": "donation-list/latest",
+			"real": "app=donate&module=donate&controller=donationlist&tab=latest"
+		},
+		"donate_donationlist_top": {
+			"friendly": "donation-list/top",
+			"real": "app=donate&module=donate&controller=donationlist&tab=top"
+		},
+		"donate_mydonations": {
+			"friendly": "my-donations",
+			"real": "app=donate&module=donate&controller=mydonations"
+		},
+		"donate_mydonations_overview": {
+			"friendly": "my-donations/overview",
+			"real": "app=donate&module=donate&controller=mydonations&tab=overview"
+		},
+		"donate_mydonations_payments": {
+			"friendly": "my-donations/payments",
+			"real": "app=donate&module=donate&controller=mydonations&tab=payments"
+		},
+		"donate_checkout": {
+			"friendly": "donate/checkout",
+			"real": "app=donate&module=donate&controller=checkout"
+		},
+		"donate_checkout_choose": {
+			"friendly": "donate/checkout/choose",
+			"real": "app=donate&module=donate&controller=checkout&_step=choose"
+		},
+		"donate_checkout_options": {
+			"friendly": "donate/checkout/options",
+			"real": "app=donate&module=donate&controller=checkout&_step=options"
+		},
+		"donate_checkout_pay": {
+			"friendly": "donate/checkout/pay",
+			"real": "app=donate&module=donate&controller=checkout&_step=pay"
+		},
+		"donate_checkout_cancel": {
+			"friendly": "donate/checkout/cancel",
+			"real": "app=donate&module=donate&controller=checkout&do=cancel"
+		},
+		"donate_checkout_confirm": {
+			"friendly": "donate/checkout/confirm",
+			"real": "app=donate&module=donate&controller=checkout&do=confirm"
+		},
+		"donate_checkout_complete": {
+			"friendly": "donate/checkout/complete",
+			"real": "app=donate&module=donate&controller=checkout&do=complete"
+		}
+	}
+}

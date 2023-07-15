@@ -1,0 +1,12 @@
+<ips:template parameters="$toggleForm, $memberForm" />
+<div class="cGift">
+	<div class="cGift_toggle ipsPos_center">
+		{$toggleForm->html()|raw}
+	</div>
+	<div class="cGift_member ipsPos_center ipsType_center ipsSpacer_top ipsSpacer_double">
+		<div class="ipsType_medium ipsSpacer_bottom ipsSpacer_half">
+			{lang="donate_checkout_gift_member_desc"}
+		</div>
+		{$memberForm->html()|raw}
+	</div>
+</div>

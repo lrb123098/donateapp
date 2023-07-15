@@ -1,0 +1,24 @@
+<ips:template parameters="$table, $headers, $rows" />
+{{if \count( $rows )}}
+	<li class="ipsDataItem ipsAreaBackground_light ipsType_minorHeading ipsResponsive_hidePhone ipsResponsive_hideTablet">
+		<div class="ipsDataItem_generic ipsDataItem_size10">
+			{lang="{$table->langPrefix}member"}
+		</div>
+		<div class="ipsDataItem_generic ipsDataItem_size9">
+			{lang="{$table->langPrefix}total"}
+		</div>
+	</li>
+	{{foreach $rows as $row}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			<div class="ipsDataItem_icon ipsDataItem_size1">
+				{template="userPhoto" app="core" group="global" params="$row['member_id'], 'tiny'"}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{$row['member_id']->link()|raw}
+			</div>
+			<div class="ipsDataItem_generic ipsDataItem_size9">
+				{$row['donation_total']->currencySymbol}{$row['donation_total']->format}
+			</div>
+		</li>
+	{{endforeach}}
+{{endif}}

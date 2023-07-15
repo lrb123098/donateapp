@@ -1,0 +1,12 @@
+<ips:template parameters="$elements" />
+{{if \count( $elements )}}
+	{{foreach $elements as $k => $element}}
+		<div {{if $k !== 0}}class="ipsSpacer_top ipsSpacer_double"{{endif}}>
+			{$element|raw}
+		</div>
+	{{endforeach}}
+{{else}}
+	<div class='ipsType_center ipsPad'>
+		<p class='ipsType_large ipsType_light'>{lang="no_rows_in_table"}</p>
+	</div>
+{{endif}}
